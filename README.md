@@ -183,6 +183,25 @@ Comando:
 
       docker run -d --name artemis -p 1883:1883 -p 5445:5445 -p 5672:5672 -p 8161:8161 -p 9404:9404 -p 61613:61613 -p 61616:61616 jamarton/artemis
 
+### Monitorización, supervisión y trazabilidad
+
+#### Prometheus (Monitorización)
+
+      docker run -d -p 9090:9090 --name prometheus -v ./config-dir/prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus
+
+#### Grafana (Monitorización)
+
+      docker run -d -p 3000:3000 --name grafana grafana/grafana
+
+#### Zipkin (Trazabilidad)
+
+      docker run -d -p 9411:9411 --name zipkin openzipkin/zipkin-slim
+
+#### ELK (supervisión)
+
+      docker run -d -p 9200:9200 -p 9300:9300 --name=elasticsearch -h elasticsearch -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:7.12.0
+      docker run -d -p 5601:5601 --name kibana -h kibana --link elasticsearch:elasticsearch docker.elastic.co/kibana/kibana:7.12.0
+
 ## Angular
 
 ### Angular Command Line Interface
