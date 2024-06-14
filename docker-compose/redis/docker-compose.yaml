@@ -1,0 +1,45 @@
+services:
+  redis:
+    container_name: redis
+    hostname: redis
+    image: redis:alpine
+    ports:
+      - 6379:6379
+    networks:
+      - microservicios
+    volumes:
+      - data:/data
+  redis-insight:
+    container_name: redis-insight
+    hostname: redis-insight
+    image: redislabs/redisinsight:latest
+    volumes:
+      - insight:/db
+    ports:
+      - 6380:8001
+    depends_on:
+      - redis
+    networks:
+      - microservicios
+  redis-commander:
+    container_name: redis-commander
+    hostname: redis-commander
+    image: rediscommander/redis-commander:latest
+    environment:
+    - REDIS_HOSTS=local:redis:6379
+    ports:
+    - 6381:8081
+    depends_on:
+      - redis
+    networks:
+      - microservicios
+    profiles:
+      - All
+
+volumes:
+  data:
+  insight:
+
+networks:
+  microservicios:
+    external: true
