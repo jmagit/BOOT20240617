@@ -106,6 +106,12 @@
 
 ## Servidores en Docker
 
+### Testing
+
+#### SonarQube
+
+      docker run -d --name sonarQube --publish 9000:9000 sonarqube:latest
+
 ### Bases de datos
 
 #### MySQL
