@@ -6,7 +6,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
+import com.example.ioc.Entorno;
 import com.example.ioc.Saluda;
+import com.example.ioc.SaludaEnImpl;
 
 @SpringBootApplication
 public class DemoApplication implements CommandLineRunner {
@@ -16,17 +18,25 @@ public class DemoApplication implements CommandLineRunner {
 	}
 
 	@Autowired
-	Saluda saluda;
+	Saluda saludaEs;
 	@Autowired
-	Saluda saluda2;
+	Saluda saludaEn;
+	@Autowired
+	Entorno entorno;
+	
+//	@Autowired(required = false)
+//	SaludaEnImpl kk;
 	
 	@Override
 	public void run(String... args) throws Exception {
 		System.err.println("Aplicación arrancada...");
 //		var saluda = new Saluda();
-		System.out.println();
-		saluda.saluda("Mundo");
-		saluda.saluda("Mundo");
+		System.out.println(saludaEs.getContador());
+		saludaEs.saluda("Mundo");
+		saludaEn.saluda("Mundo");
+		System.out.println(saludaEs.getContador());
+		System.out.println(saludaEn.getContador());
+		System.out.println(entorno.getContador());
 	}
 
 }

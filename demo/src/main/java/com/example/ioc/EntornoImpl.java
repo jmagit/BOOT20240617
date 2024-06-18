@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 public class EntornoImpl implements Entorno {
 	private int contador;
 	
-	public EntornoImpl(int contador) {
-		this.contador = contador;
+	public EntornoImpl(int contInit) {
+		this.contador = contInit;
 	}
 
 	@Override

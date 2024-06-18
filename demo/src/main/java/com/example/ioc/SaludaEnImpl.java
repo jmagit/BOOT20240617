@@ -1,8 +1,9 @@
 package com.example.ioc;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
-//@Component
+@Component("saludaEn")
 public class SaludaEnImpl implements Saluda {
 	Entorno entorno;
 	
