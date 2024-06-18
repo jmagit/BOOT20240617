@@ -1,7 +1,9 @@
 package com.example.ioc;
 
+import jakarta.annotation.Nonnull;
+
 public interface Saluda {
 
-	void saluda(String nombre);
+	void saluda(@Nonnull String nombre);
 	int getContador();
 }

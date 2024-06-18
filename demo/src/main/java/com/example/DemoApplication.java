@@ -36,6 +36,7 @@ public class DemoApplication implements CommandLineRunner {
 //		var saluda = new Saluda();
 		System.out.println(saluda.getContador());
 		saluda.saluda("Mundo");
+//		saluda.saluda(null);
 		saluda2.saluda("Mundo");
 		System.out.println(saluda.getContador());
 		System.out.println(saluda2.getContador());
