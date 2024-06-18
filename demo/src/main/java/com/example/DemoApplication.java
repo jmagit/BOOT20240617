@@ -19,10 +19,10 @@ public class DemoApplication implements CommandLineRunner {
 	}
 
 	@Autowired
-	@Qualifier("es")
+//	@Qualifier("es")
 	Saluda saluda;
 	@Autowired
-	@Qualifier("en")
+//	@Qualifier("en")
 	Saluda saluda2;
 	@Autowired
 	Entorno entorno;
