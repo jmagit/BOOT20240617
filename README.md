@@ -66,6 +66,22 @@
 - [Markdown (es)](https://markdown.es/sintaxis-markdown/)
 - [Markdown](https://www.markdownguide.org/basic-syntax/)
 
+### Fundamentos Back end
+
+#### Ejercicios de refuerzo
+
+- <https://www.javatpoint.com/>
+- Iniciación:
+    1. <http://puntocomnoesunlenguaje.blogspot.com/p/ejercicios.html>
+    2. <https://tutobasico.com/basicos-java/>
+    3. <https://tutobasico.com/basicos2-java/>
+    4. <https://www.discoduroderoer.es/ejercicios-propuestos-y-resueltos-basicos-java/>
+    5. <https://www.discoduroderoer.es/ejercicios-propuestos-y-resueltos-metodos-y-funciones-de-java/>
+- Intermedio:
+    1. <https://tutobasico.com/basicos3-java/>
+    2. <http://ejerciciosresueltosprogramacion.blogspot.com/>
+    3. <https://www.discoduroderoer.es/ejercicios-propuestos-y-resueltos-programacion-orientado-a-objetos-java/>
+
 ### Fundamentos Front end
 
 - <https://www.w3schools.com/html>
