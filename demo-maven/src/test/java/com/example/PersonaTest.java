@@ -10,10 +10,13 @@ import static org.junit.jupiter.api.Assumptions.assumeFalse;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.aggregator.ArgumentsAccessor;
 import org.junit.jupiter.params.provider.CsvSource;
+
+import com.example.core.test.Smoke;
 
 class PersonaTest {
 
@@ -23,6 +26,7 @@ class PersonaTest {
 		@Nested
 		class OK {
 			@Test
+			@Smoke
 			void soloNombre() {
 				var persona = new Persona(1, "Pepito");
 //				var persona = new Persona(2, "Pepitos", "grillo");
