@@ -140,8 +140,13 @@ class GildedRoseTest {
 	}
 
 	@ParameterizedTest(name = "{index} => sellIn: {0} quality: {1} –> sellIn: {2} quality: {3}")
-	@CsvSource({ "11, 10, 10, 8", "7, 1, 6, 0", "-5, 10, -6, 6", "0, 3, -1, 0", })
-	@Disabled
+	@CsvSource({ 
+		"11, 10, 10, 8", 
+		"7, 1, 6, 0", 
+		"-5, 10, -6, 6", 
+		"0, 3, -1, 0", 
+		})
+//	@Disabled
 	void product_Conjured_Test(int sellIn, int quality, int sellInResult, int qualityResult) {
 		String name = "Conjured Mana Cake";
 		Item product = new Item(name, sellIn, quality);
@@ -154,7 +159,7 @@ class GildedRoseTest {
 
 	@ParameterizedTest(name = "{0} => sellIn: {1} quality: {2} –> sellIn: {3} quality: {4}")
 	@CsvFileSource(resources = "casos-de-prueba.csv", numLinesToSkip = 1)
-    	@Disabled
+//    	@Disabled
 	void datasourceTest(String producto, int sellIn, int quality, int sellInResult, int qualityResult) {
 		String name = producto.replace("\'", "");
 		Item product = new Item(name, sellIn, quality);
