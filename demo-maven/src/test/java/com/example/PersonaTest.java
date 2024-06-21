@@ -88,7 +88,7 @@ class PersonaTest {
 			srv.ponMayusculas(1);
 
 			//assertEquals("PEPITO", persona.getNombre());
-			verify(dao).modify(captor.capture()); //new Persona(1, "PEPITO","Grillo")
+			verify(dao).modify(captor.capture());
 			assertAll("Persona", () -> assertEquals(1, captor.getValue().getId(), "id"),
 					() -> assertEquals("PEPITO", captor.getValue().getNombre(), "nombre"),
 					() -> assertEquals("Grillo", captor.getValue().getApellidos().orElseGet(() -> "sin apellidos"), "apellidos"));
