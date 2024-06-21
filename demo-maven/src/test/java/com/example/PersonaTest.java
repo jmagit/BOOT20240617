@@ -22,6 +22,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.aggregator.ArgumentsAccessor;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.mockito.ArgumentCaptor;
 
 import com.example.core.test.Smoke;
 
@@ -78,18 +79,21 @@ class PersonaTest {
 		
 		@Test
 		void ponMayusculasService() {
-			var persona = new Persona(1, "Pepito","Grillo");
+			var persona = new Persona(1, "Pepito"/*,"Grillo"*/);
+			var captor = ArgumentCaptor.forClass(Persona.class);
 			var dao = mock(PersonaRepository.class);
 			when(dao.getOne(anyInt())).thenReturn(Optional.of(persona));
-			//doNothing().when(dao).modify(new Persona(1, "PEPITO","Grillo")); 
 			var srv = new PersonaService(dao);
 			
 			srv.ponMayusculas(1);
-			
-			assertEquals("PEPITO", persona.getNombre());
-			verify(dao).modify(persona); //new Persona(1, "PEPITO","Grillo")
-			
+
+			//assertEquals("PEPITO", persona.getNombre());
+			verify(dao).modify(captor.capture()); //new Persona(1, "PEPITO","Grillo")
+			assertAll("Persona", () -> assertEquals(1, captor.getValue().getId(), "id"),
+					() -> assertEquals("PEPITO", captor.getValue().getNombre(), "nombre"),
+					() -> assertEquals("Grillo", captor.getValue().getApellidos().orElseGet(() -> "sin apellidos"), "apellidos"));
 		}
+		
 		@Test
 		void ponMayusculasServiceKO() {
 			var dao = mock(PersonaRepository.class);
