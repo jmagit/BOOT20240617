@@ -126,33 +126,33 @@
 
 #### SonarQube
 
-      docker run -d --name sonarQube --publish 9000:9000 sonarqube:latest
+    docker run -d --name sonarQube --publish 9000:9000 sonarqube:latest
 
 ### Bases de datos
 
 #### MySQL
 
-      docker run -d --name mysql-sakila -e MYSQL_ROOT_PASSWORD=root -p 3306:3306 jamarton/mysql-sakila
+    docker run -d --name mysql-sakila -e MYSQL_ROOT_PASSWORD=root -p 3306:3306 jamarton/mysql-sakila
 
 #### MongoDB
 
-      docker run -d --name mongodb -p 27017:27017 -v .:/externo jamarton/mongodb-contactos
+    docker run -d --name mongodb -p 27017:27017 -v .:/externo jamarton/mongodb-contactos
 
 #### Redis
 
-      docker run -d --name redis -p 6379:6379 redis
+    docker run -d --name redis -p 6379:6379 redis
 
 #### Apache Cassandra
 
-      docker run -d --name cassandra -p 9042:9042 -v .:/externo jamarton/cassandra-videodb
+    docker run -d --name cassandra -p 9042:9042 -v .:/externo jamarton/cassandra-videodb
       
-      docker exec -it cassandra sh -c /init-db.sh
+    docker exec -it cassandra sh -c /init-db.sh
 
 ### Agentes de Mensajería
 
 #### RabbitMQ (AMQP)
 
-      docker run -d --name rabbitmq -p 4369:4369 -p 5671:5671 -p 5672:5672 -p 15671:15671 -p 15672:15672 -p 25672:25672 -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=curso rabbitmq:management-alpine
+    docker run -d --name rabbitmq -p 4369:4369 -p 5671:5671 -p 5672:5672 -p 15671:15671 -p 15672:15672 -p 25672:25672 -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=curso rabbitmq:management-alpine
 
 #### Kafka (docker compose)
 
@@ -197,32 +197,32 @@ Fichero docker-compose.yml:
 
 Comando:
 
-      cd docker-compose\kafka && docker compose up -d
+    cd docker-compose\kafka && docker compose up -d
 
 #### Apache ActiveMQ o Artemis (JMS)
 
-      docker run -d --name activemq -p 1883:1883 -p 5672:5672 -p 8161:8161 -p 61613:61613 -p 61614:61614 -p 61616:61616 jamarton/activemq
+    docker run -d --name activemq -p 1883:1883 -p 5672:5672 -p 8161:8161 -p 61613:61613 -p 61614:61614 -p 61616:61616 jamarton/activemq
 
-      docker run -d --name artemis -p 1883:1883 -p 5445:5445 -p 5672:5672 -p 8161:8161 -p 9404:9404 -p 61613:61613 -p 61616:61616 jamarton/artemis
+    docker run -d --name artemis -p 1883:1883 -p 5445:5445 -p 5672:5672 -p 8161:8161 -p 9404:9404 -p 61613:61613 -p 61616:61616 jamarton/artemis
 
 ### Monitorización, supervisión y trazabilidad
 
 #### Prometheus (Monitorización)
 
-      docker run -d -p 9090:9090 --name prometheus -v ./config-dir/prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus
+    docker run -d -p 9090:9090 --name prometheus -v ./config-dir/prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus
 
 #### Grafana (Monitorización)
 
-      docker run -d -p 3000:3000 --name grafana grafana/grafana
+    docker run -d -p 3000:3000 --name grafana grafana/grafana
 
 #### Zipkin (Trazabilidad)
 
-      docker run -d -p 9411:9411 --name zipkin openzipkin/zipkin-slim
+    docker run -d -p 9411:9411 --name zipkin openzipkin/zipkin-slim
 
 #### ELK (supervisión)
 
-      docker run -d -p 9200:9200 -p 9300:9300 --name=elasticsearch -h elasticsearch -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:7.12.0
-      docker run -d -p 5601:5601 --name kibana -h kibana --link elasticsearch:elasticsearch docker.elastic.co/kibana/kibana:7.12.0
+    docker run -d -p 9200:9200 -p 9300:9300 --name=elasticsearch -h elasticsearch -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:7.12.0
+    docker run -d -p 5601:5601 --name kibana -h kibana --link elasticsearch:elasticsearch docker.elastic.co/kibana/kibana:7.12.0
 
 ## Angular
 
@@ -242,5 +242,3 @@ Comando:
 
 - [Oficial](https://angular.dev/)
 - [Oficial (legacy)](https://angular.io/docs)
-- 
- branc
