@@ -41,8 +41,9 @@ public class DemoApplication implements CommandLineRunner {
 //			actor.setFirstName(actor.getFirstName().toUpperCase());
 //			dao.save(actor);
 //		}
-		dao.deleteById(201);
-		dao.findAll().forEach(System.out::println);
+//		dao.deleteById(201);
+//		dao.findAll().forEach(System.out::println);
+		dao.findTop5ByLastNameStartingWithOrderByFirstNameDesc("P").forEach(System.out::println);
 	}
 
 	/*
