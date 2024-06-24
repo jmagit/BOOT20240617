@@ -54,14 +54,20 @@ public class DemoApplication implements CommandLineRunner {
 //		dao.findBySQL(200).forEach(System.out::println);
 //		dao.findAll((root, query, builder) -> builder.greaterThanOrEqualTo(root.get("actorId"), 200)).forEach(System.out::println);
 //		dao.findAll((root, query, builder) -> builder.lessThan(root.get("actorId"), 10)).forEach(System.out::println);
-		var item = dao.findById(1);
-		if(item.isEmpty()) {
-			System.err.println("No encontrado");
-		} else {
-			var actor = item.get();
-			System.out.println(actor);
-			actor.getFilmActors().forEach(f -> System.out.println(f.getFilm().getTitle()));
-		}
+//		var item = dao.findById(1);
+//		if(item.isEmpty()) {
+//			System.err.println("No encontrado");
+//		} else {
+//			var actor = item.get();
+//			System.out.println(actor);
+//			actor.getFilmActors().forEach(f -> System.out.println(f.getFilm().getTitle()));
+//		}
+		var actor = new Actor(0, null, "12345678Z");
+//		if(actor.isValid()) {
+		System.out.println(dao.save(actor));
+//		} else {
+//			actor.getErrors().forEach(System.out::println);
+//		}
 	}
 
 	/*
