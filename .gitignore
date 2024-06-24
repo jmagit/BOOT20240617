@@ -5,6 +5,7 @@ target/**
 *.ear
 *.class
 kk/**
+libraries/**
 
 # eclipse specific
 *.pydevproject
