@@ -33,14 +33,15 @@ public class DemoApplication implements CommandLineRunner {
 //		}
 //		var actor = new Actor(0, "Pepito", "Grillo");
 //		System.out.println(dao.save(actor));
-		var item = dao.findById(201);
-		if(item.isEmpty()) {
-			System.err.println("No encontrado");
-		} else {
-			var actor = item.get();
-			actor.setFirstName(actor.getFirstName().toUpperCase());
-			dao.save(actor);
-		}
+//		var item = dao.findById(201);
+//		if(item.isEmpty()) {
+//			System.err.println("No encontrado");
+//		} else {
+//			var actor = item.get();
+//			actor.setFirstName(actor.getFirstName().toUpperCase());
+//			dao.save(actor);
+//		}
+		dao.deleteById(201);
 		dao.findAll().forEach(System.out::println);
 	}
 
