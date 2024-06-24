@@ -49,7 +49,8 @@ public class DemoApplication implements CommandLineRunner {
 		dao.findByActorIdGreaterThanEqual(200).forEach(System.out::println);
 		dao.findByJPQL(200).forEach(System.out::println);
 		dao.findBySQL(200).forEach(System.out::println);
-		dao.findAll((root, query, builder) -> builder.greaterThanOrEqualTo(root.get("actorId"), 200));
+		dao.findAll((root, query, builder) -> builder.greaterThanOrEqualTo(root.get("actorId"), 200)).forEach(System.out::println);
+		dao.findAll((root, query, builder) -> builder.lessThan(root.get("actorId"), 10)).forEach(System.out::println);
 	}
 
 	/*
