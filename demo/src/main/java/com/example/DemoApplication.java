@@ -62,9 +62,9 @@ public class DemoApplication implements CommandLineRunner {
 //			System.out.println(actor);
 //			actor.getFilmActors().forEach(f -> System.out.println(f.getFilm().getTitle()));
 //		}
-		var actor = new Actor(0, null, "12345678Z");
+//		var actor = new Actor(0, null, "12345678Z");
 //		if(actor.isValid()) {
-		System.out.println(dao.save(actor));
+//		System.out.println(dao.save(actor));
 //		} else {
 //			actor.getErrors().forEach(System.out::println);
 //		}
