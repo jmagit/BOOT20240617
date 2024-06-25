@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
 import com.example.domains.contracts.repositories.ActorRepository;
+import com.example.domains.contracts.services.ActorService;
 import com.example.domains.entities.Actor;
 import com.example.domains.entities.models.ActorDTO;
 import com.example.domains.entities.models.ActorOtroDTO;
@@ -27,7 +28,16 @@ public class DemoApplication implements CommandLineRunner {
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 	}
+	
+	@Autowired
+	ActorService srv;
+	
+	public void run(String... args) throws Exception {
+		System.err.println("Aplicación arrancada...");
+		srv.getByProjection(ActorDTO.class).forEach(System.out::println);
+	}
 
+	/*
 	@Autowired
 	ActorRepository dao;
 
@@ -103,6 +113,7 @@ public class DemoApplication implements CommandLineRunner {
 		});
 
 	}
+	*/
 	/*
 	 * @Autowired // @Qualifier("es") Saluda saluda;
 	 * 
