@@ -29,12 +29,13 @@ public class DemoApplication implements CommandLineRunner {
 		SpringApplication.run(DemoApplication.class, args);
 	}
 	
-	@Autowired
-	ActorService srv;
-	
+//	@Autowired
+//	ActorService srv;
+//	
+	@Override
 	public void run(String... args) throws Exception {
 		System.err.println("Aplicación arrancada...");
-		srv.getByProjection(ActorDTO.class).forEach(System.out::println);
+//		srv.getByProjection(ActorDTO.class).forEach(System.out::println);
 	}
 
 	/*
