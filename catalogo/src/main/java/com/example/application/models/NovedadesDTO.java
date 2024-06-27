@@ -1,4 +1,4 @@
-package com.example.appliocation.models;
+package com.example.application.models;
 
 import java.util.List;
 
