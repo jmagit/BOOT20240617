@@ -6,6 +6,8 @@ import jakarta.validation.constraints.NotNull;
 
 import java.sql.Timestamp;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 /**
  * The persistent class for the film_category database table.
@@ -26,13 +28,13 @@ public class FilmCategory implements Serializable {
 	//bi-directional many-to-one association to Category
 	@ManyToOne
 	@JoinColumn(name="category_id", insertable=false, updatable=false)
-	@NotNull
+	@JsonManagedReference
 	private Category category;
 
 	//bi-directional many-to-one association to Film
 	@ManyToOne
 	@JoinColumn(name="film_id", insertable=false, updatable=false)
-	@NotNull
+	@JsonManagedReference
 	private Film film;
 
 	public FilmCategory() {
@@ -74,8 +76,9 @@ public class FilmCategory implements Serializable {
 	public void setFilm(Film film) {
 		this.film = film;
 	}
+	
 	@PrePersist
-	private void prePersiste() {
+	void prePersiste() {
 		if (id == null) {
 			setId(new FilmCategoryPK(film.getFilmId(), category.getCategoryId()));
 		}

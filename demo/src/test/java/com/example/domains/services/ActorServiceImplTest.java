@@ -49,12 +49,6 @@ class ActorServiceImplTest {
 
 	@Test
 	void testGetOne_valid() {
-		List<Actor> lista = new ArrayList<>(
-				Arrays.asList(
-						new Actor(1, "Pepito", "GRILLO"),
-						new Actor(2, "Carmelo", "COTON"), 
-						new Actor(3, "Capitan", "TAN")));
-
 		when(dao.findById(1)).thenReturn(Optional.of(new Actor(1, "Pepito", "GRILLO")));
 		var rslt = srv.getOne(1);
 		assertThat(rslt.isPresent()).isTrue();
