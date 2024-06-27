@@ -10,11 +10,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.scope.context.ChunkContext;
+import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.io.Resource;
 import org.springframework.util.Assert;
 
-public class FTPLoadTasklet {
+public class FTPLoadTasklet  implements Tasklet, InitializingBean {
 	private static final Logger log = LoggerFactory.getLogger(FTPLoadTasklet.class);
 	private Resource source;
 
