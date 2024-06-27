@@ -24,7 +24,9 @@ import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor;
 import org.springframework.batch.item.file.transform.DelimitedLineAggregator;
 import org.springframework.batch.item.xml.StaxEventItemReader;
+import org.springframework.batch.item.xml.StaxEventItemWriter;
 import org.springframework.batch.item.xml.builder.StaxEventItemReaderBuilder;
+import org.springframework.batch.item.xml.builder.StaxEventItemWriterBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.sql.init.dependency.DependsOnDatabaseInitialization;
@@ -164,25 +166,59 @@ public class PersonasBatchConfiguration {
 				.writer(personaDBItemWriter).build();
 	}
 	
+	// DB a XML
+	
+	public StaxEventItemWriter<Persona> personaXMLItemWriter() {
+		XStreamMarshaller marshaller = new XStreamMarshaller();
+		Map<String, Class> aliases = new HashMap<>();
+		aliases.put("Persona", Persona.class);
+		marshaller.setAliases(aliases);
+		return new StaxEventItemWriterBuilder<Persona>()
+				.name("personaXMLItemWriter")
+				.resource(new FileSystemResource("output/outputData.xml"))
+				.marshaller(marshaller)
+				.rootTagName("Personas")
+				.overwriteOutput(true)
+				.build();
+	}
+	
+	@Bean
+	public Step exportDB2XMLStep(JdbcCursorItemReader<Persona> personaDBItemReader) {
+		return new StepBuilder("exportDB2XMLStep", jobRepository)
+				.<Persona, Persona>chunk(100, transactionManager)
+				.reader(personaDBItemReader)
+				.writer(personaXMLItemWriter())
+				.build();
+	}
+	
 	// Job
 
-	@Bean
-	public Job personasJob(PersonasJobListener listener, Step copyFilesInDir, Step importCSV2DBStep1,
-			Step exportDB2CSVStep) {
-//		return new JobBuilder("personasJob", jobRepository)
+//	@Bean
+//	public Job personasJob(PersonasJobListener listener, Step copyFilesInDir, Step importCSV2DBStep1,
+//			Step exportDB2CSVStep) {
+////		return new JobBuilder("personasJob", jobRepository)
+////				.incrementer(new RunIdIncrementer())
+////				.listener(listener)
+////				.start(copyFilesInDir)
+////				.next(importCSV2DBStep1)
+////				.next(exportDB2CSVStep)
+////				.build();
+//		var job = new JobBuilder("personasJob", jobRepository)
 //				.incrementer(new RunIdIncrementer())
 //				.listener(listener)
-//				.start(copyFilesInDir)
-//				.next(importCSV2DBStep1)
-//				.next(exportDB2CSVStep)
-//				.build();
-		var job = new JobBuilder("personasJob", jobRepository)
+//				.start(copyFilesInDir);
+//		job = job.next(importCSV2DBStep1);
+//		job = job.next(exportDB2CSVStep);
+//		return job.build();
+//	}
+	@Bean
+	public Job personasJob(Step importXML2DBStep1, Step exportDB2XMLStep, Step exportDB2CSVStep) {
+		return new JobBuilder("personasJob", jobRepository)
 				.incrementer(new RunIdIncrementer())
-				.listener(listener)
-				.start(copyFilesInDir);
-		job = job.next(importCSV2DBStep1);
-		job = job.next(exportDB2CSVStep);
-		return job.build();
+				.start(importXML2DBStep1)
+				.next(exportDB2XMLStep)
+				.next(exportDB2CSVStep)
+				.build();
 	}
 
 }
