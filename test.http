@@ -1,0 +1,13 @@
+
+post http://localhost:8090/ws/calculator
+Content-Type: text/xml
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cal="http://example.com/webservices/schemas/calculator">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cal:addRequest>
+         <cal:op1>2</cal:op1>
+         <cal:op2>3</cal:op2>
+      </cal:addRequest>
+   </soapenv:Body>
+</soapenv:Envelope>
