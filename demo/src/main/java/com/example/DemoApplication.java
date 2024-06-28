@@ -1,26 +1,16 @@
 package com.example;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
+import org.springframework.context.annotation.Bean;
+import org.springframework.oxm.jaxb.Jaxb2Marshaller;
+import org.springframework.ws.client.core.WebServiceTemplate;
+import org.springframework.ws.soap.client.core.SoapActionCallback;
 
-import com.example.domains.contracts.repositories.ActorRepository;
-import com.example.domains.contracts.services.ActorService;
-import com.example.domains.entities.Actor;
-import com.example.domains.entities.models.ActorDTO;
-import com.example.domains.entities.models.ActorOtroDTO;
-import com.example.domains.entities.models.ActorShort;
-import com.example.ioc.Entorno;
-import com.example.ioc.Rango;
-import com.example.ioc.Saluda;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-
-import jakarta.transaction.Transactional;
+import com.example.domains.contracts.proxies.CalculatorProxy;
+import com.example.webservice.schema.AddRequest;
+import com.example.webservice.schema.AddResponse;
 
 @SpringBootApplication
 public class DemoApplication implements CommandLineRunner {
@@ -36,6 +26,24 @@ public class DemoApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		System.err.println("Aplicación arrancada...");
 //		srv.getByProjection(ActorDTO.class).forEach(System.out::println);
+	}
+	
+//	@Bean
+//	CommandLineRunner lookup(CalculatorProxy client) {
+//		return args -> { System.err.println("Calculo remoto --> " + client.add(2, 3)); };
+//	}
+	
+	@Bean
+	CommandLineRunner lookup(Jaxb2Marshaller marshaller) {
+		return args -> {		
+			WebServiceTemplate ws = new WebServiceTemplate(marshaller);
+			var request = new AddRequest();
+			request.setOp1(2);
+			request.setOp2(3);
+			var response = (AddResponse) ws.marshalSendAndReceive("http://localhost:8090/ws/calculator", 
+					 request, new SoapActionCallback("http://example.com/webservices/schemas/calculator"));
+			System.err.println("Calculo remoto --> " + response.getAddResult());
+		};
 	}
 
 	/*

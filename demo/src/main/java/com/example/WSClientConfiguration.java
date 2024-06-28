@@ -18,7 +18,7 @@ public class WSClientConfiguration {
 	@Bean
 	public CalculatorProxy calculatorProxy(Jaxb2Marshaller marshaller) {
 		var client = new CalculatorProxyImpl();
-		client.setDefaultUri("http://localhost:8050/ws/calculator");
+		client.setDefaultUri("http://localhost:8090/ws/calculator");
 		client.setMarshaller(marshaller);
 		client.setUnmarshaller(marshaller);
 		return client;
