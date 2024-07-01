@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="63e23cfe-944e-49f4-b770-950e29dd3ec9" activeEnvironment="Default" name="calculator" resourceRoot="" soapui-version="5.7.2" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="107d4637-feb9-420e-8bb5-c762e9b93ab1" wsaVersion="NONE" name="CalculatorPortSoap11" type="wsdl" bindingName="{http://example.com/webservices/schemas/calculator}CalculatorPortSoap11" soapVersion="1_1" anonymous="optional" definition="http://localhost:8090/ws/calculator.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8090/ws/calculator.wsdl"><con:part><con:url>http://localhost:8090/ws/calculator.wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://example.com/webservices/schemas/calculator" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://example.com/webservices/schemas/calculator" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://example.com/webservices/schemas/calculator">
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://example.com/webservices/schemas/calculator" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="addRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="1" minOccurs="1" name="op1" type="xs:double"/>
+            <xs:element maxOccurs="1" minOccurs="1" name="op2" type="xs:double"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="addResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="1" minOccurs="1" name="addResult" type="xs:double"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="subtractRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="1" minOccurs="1" name="op1" type="xs:double"/>
+            <xs:element maxOccurs="1" minOccurs="1" name="op2" type="xs:double"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="subtractResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="1" minOccurs="1" name="subtractResult" type="xs:double"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="multiplyRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="1" minOccurs="1" name="op1" type="xs:double"/>
+            <xs:element maxOccurs="1" minOccurs="1" name="op2" type="xs:double"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="multiplyResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="1" minOccurs="1" name="multiplyResult" type="xs:double"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="divideRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="1" minOccurs="1" name="op1" type="xs:double"/>
+            <xs:element maxOccurs="1" minOccurs="1" name="op2" type="xs:double"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="divideResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="1" minOccurs="1" name="divideResult" type="xs:double"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="subtractRequest">
+    <wsdl:part element="tns:subtractRequest" name="subtractRequest"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="divideRequest">
+    <wsdl:part element="tns:divideRequest" name="divideRequest"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="multiplyRequest">
+    <wsdl:part element="tns:multiplyRequest" name="multiplyRequest"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="divideResponse">
+    <wsdl:part element="tns:divideResponse" name="divideResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addResponse">
+    <wsdl:part element="tns:addResponse" name="addResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="multiplyResponse">
+    <wsdl:part element="tns:multiplyResponse" name="multiplyResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="subtractResponse">
+    <wsdl:part element="tns:subtractResponse" name="subtractResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addRequest">
+    <wsdl:part element="tns:addRequest" name="addRequest"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="CalculatorPort">
+    <wsdl:operation name="subtract">
+      <wsdl:input message="tns:subtractRequest" name="subtractRequest"></wsdl:input>
+      <wsdl:output message="tns:subtractResponse" name="subtractResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="divide">
+      <wsdl:input message="tns:divideRequest" name="divideRequest"></wsdl:input>
+      <wsdl:output message="tns:divideResponse" name="divideResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="multiply">
+      <wsdl:input message="tns:multiplyRequest" name="multiplyRequest"></wsdl:input>
+      <wsdl:output message="tns:multiplyResponse" name="multiplyResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="add">
+      <wsdl:input message="tns:addRequest" name="addRequest"></wsdl:input>
+      <wsdl:output message="tns:addResponse" name="addResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CalculatorPortSoap11" type="tns:CalculatorPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="subtract">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="subtractRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="subtractResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="divide">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="divideRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="divideResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="multiply">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="multiplyRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="multiplyResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="add">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="addRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CalculatorPortService">
+    <wsdl:port binding="tns:CalculatorPortSoap11" name="CalculatorPortSoap11">
+      <soap:address location="http://localhost:8090/ws/calculator"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8090/ws/calculator</con:endpoint></con:endpoints><con:operation id="60a55908-2572-4ff8-aee8-21269ec490f1" isOneWay="false" action="" name="add" bindingOperationName="add" type="Request-Response" outputName="addResponse" inputName="addRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="c4dd1470-dcf4-49c7-83cf-1c23e398bd62" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8090/ws/calculator</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cal="http://example.com/webservices/schemas/calculator">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <cal:addRequest>\r
+         <cal:op1>0.1</cal:op1>\r
+         <cal:op2>0.2</cal:op2>\r
+      </cal:addRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://example.com/webservices/schemas/calculator/CalculatorPort/addRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="fe0279b5-3f70-4cf4-aef0-9fcdc03ba02e" isOneWay="false" action="" name="subtract" bindingOperationName="subtract" type="Request-Response" outputName="subtractResponse" inputName="subtractRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="b1c5475c-e84b-4132-9337-3cc033030421" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8090/ws/calculator</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cal="http://example.com/webservices/schemas/calculator">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <cal:subtractRequest>\r
+         <cal:op1>?</cal:op1>\r
+         <cal:op2>?</cal:op2>\r
+      </cal:subtractRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://example.com/webservices/schemas/calculator/CalculatorPort/subtractRequest"/></con:call></con:operation><con:operation id="16a9c0d6-b148-4807-a586-9016cd16a545" isOneWay="false" action="" name="divide" bindingOperationName="divide" type="Request-Response" outputName="divideResponse" inputName="divideRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="a70b5981-c273-4316-a11c-659070c29b85" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8090/ws/calculator</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cal="http://example.com/webservices/schemas/calculator">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <cal:divideRequest>\r
+         <cal:op1>1</cal:op1>\r
+         <cal:op2>0</cal:op2>\r
+      </cal:divideRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://example.com/webservices/schemas/calculator/CalculatorPort/divideRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="58eb8b87-34fd-4445-b39b-71ed1ca1a437" isOneWay="false" action="" name="multiply" bindingOperationName="multiply" type="Request-Response" outputName="multiplyResponse" inputName="multiplyRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="1aa296d4-f502-45a6-9e77-c61483becdd7" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8090/ws/calculator</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cal="http://example.com/webservices/schemas/calculator">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <cal:multiplyRequest>\r
+         <cal:op1>?</cal:op1>\r
+         <cal:op2>?</cal:op2>\r
+      </cal:multiplyRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://example.com/webservices/schemas/calculator/CalculatorPort/multiplyRequest"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>

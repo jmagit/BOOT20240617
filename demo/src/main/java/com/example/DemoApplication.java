@@ -28,12 +28,12 @@ public class DemoApplication implements CommandLineRunner {
 //		srv.getByProjection(ActorDTO.class).forEach(System.out::println);
 	}
 	
-//	@Bean
-//	CommandLineRunner lookup(CalculatorProxy client) {
-//		return args -> { System.err.println("Calculo remoto --> " + client.add(2, 3)); };
-//	}
-	
 	@Bean
+	CommandLineRunner lookup(CalculatorProxy client) {
+		return args -> { System.err.println("CalculatorProxy --> " + client.add(2, 3)); };
+	}
+	
+//	@Bean
 	CommandLineRunner lookup(Jaxb2Marshaller marshaller) {
 		return args -> {		
 			WebServiceTemplate ws = new WebServiceTemplate(marshaller);
@@ -42,7 +42,7 @@ public class DemoApplication implements CommandLineRunner {
 			request.setOp2(3);
 			var response = (AddResponse) ws.marshalSendAndReceive("http://localhost:8090/ws/calculator", 
 					 request, new SoapActionCallback("http://example.com/webservices/schemas/calculator"));
-			System.err.println("Calculo remoto --> " + response.getAddResult());
+			System.err.println("WebServiceTemplate --> " + response.getAddResult());
 		};
 	}
 
