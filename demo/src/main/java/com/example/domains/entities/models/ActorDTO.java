@@ -5,6 +5,8 @@ import java.io.Serializable;
 import com.example.domains.entities.Actor;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -13,6 +15,8 @@ public class ActorDTO implements Serializable {
 	@JsonProperty("id")
 	private int actorId;
 	@JsonProperty("nombre")
+	@NotBlank
+	@Size(max = 5)
 	private String firstName;
 	@JsonProperty("apellidos")
 	private String lastName;

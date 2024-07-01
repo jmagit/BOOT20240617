@@ -171,7 +171,7 @@
    <soapenv:Body>\r
       <cal:divideRequest>\r
          <cal:op1>1</cal:op1>\r
-         <cal:op2>0</cal:op2>\r
+         <cal:op2>2</cal:op2>\r
       </cal:divideRequest>\r
    </soapenv:Body>\r
 </soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://example.com/webservices/schemas/calculator/CalculatorPort/divideRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="58eb8b87-34fd-4445-b39b-71ed1ca1a437" isOneWay="false" action="" name="multiply" bindingOperationName="multiply" type="Request-Response" outputName="multiplyResponse" inputName="multiplyRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="1aa296d4-f502-45a6-9e77-c61483becdd7" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8090/ws/calculator</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cal="http://example.com/webservices/schemas/calculator">\r

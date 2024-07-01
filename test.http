@@ -11,3 +11,48 @@ Content-Type: text/xml
       </cal:addRequest>
    </soapenv:Body>
 </soapenv:Envelope>
+
+###
+
+get http://localhost:8001/api/actores/v1?page=1
+Accept: application/pdf,application/json
+
+###
+
+get http://localhost:8001/api/actores/v1?modo=kk
+Accept: application/xml
+
+###
+
+get http://localhost:8001/api/actores/v1/1/pelis
+Accept: application/pdf,application/json
+
+
+###
+
+post http://localhost:8001/api/actores/v1
+Content-Type: application/json
+
+{
+  "nombre": "Servicio",
+  "apellidos": "Rest"
+}
+
+###
+
+put http://localhost:8001/api/actores/v1/205
+Content-Type: application/json
+
+{
+  "id": 205,
+  "nombre": " ",
+  "apellidos": "Rest"
+}
+
+###
+
+DELETE http://localhost:8001/api/actores/v1/205
+
+###
+
+get http://localhost:8001/api/actores/v1/205

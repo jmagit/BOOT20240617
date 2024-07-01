@@ -27,24 +27,24 @@ public class DemoApplication implements CommandLineRunner {
 		System.err.println("Aplicación arrancada...");
 //		srv.getByProjection(ActorDTO.class).forEach(System.out::println);
 	}
-	
-	@Bean
-	CommandLineRunner lookup(CalculatorProxy client) {
-		return args -> { System.err.println("CalculatorProxy --> " + client.add(2, 3)); };
-	}
-	
+//	
 //	@Bean
-	CommandLineRunner lookup(Jaxb2Marshaller marshaller) {
-		return args -> {		
-			WebServiceTemplate ws = new WebServiceTemplate(marshaller);
-			var request = new AddRequest();
-			request.setOp1(2);
-			request.setOp2(3);
-			var response = (AddResponse) ws.marshalSendAndReceive("http://localhost:8090/ws/calculator", 
-					 request, new SoapActionCallback("http://example.com/webservices/schemas/calculator"));
-			System.err.println("WebServiceTemplate --> " + response.getAddResult());
-		};
-	}
+//	CommandLineRunner lookup(CalculatorProxy client) {
+//		return args -> { System.err.println("CalculatorProxy --> " + client.add(2, 3)); };
+//	}
+//	
+////	@Bean
+//	CommandLineRunner lookup(Jaxb2Marshaller marshaller) {
+//		return args -> {		
+//			WebServiceTemplate ws = new WebServiceTemplate(marshaller);
+//			var request = new AddRequest();
+//			request.setOp1(2);
+//			request.setOp2(3);
+//			var response = (AddResponse) ws.marshalSendAndReceive("http://localhost:8090/ws/calculator", 
+//					 request, new SoapActionCallback("http://example.com/webservices/schemas/calculator"));
+//			System.err.println("WebServiceTemplate --> " + response.getAddResult());
+//		};
+//	}
 
 	/*
 	@Autowired

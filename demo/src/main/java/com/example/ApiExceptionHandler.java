@@ -163,9 +163,9 @@ public class ApiExceptionHandler {
 		return problem;
 	}
 
-	@ExceptionHandler({ Exception.class })
-	public ProblemDetail unknow(Exception exception) {
-		return ProblemDetail.forStatusAndDetail(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
-	}
+//	@ExceptionHandler({ Exception.class })
+//	public ProblemDetail unknow(Exception exception) {
+//		return ProblemDetail.forStatusAndDetail(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+//	}
 
 }
