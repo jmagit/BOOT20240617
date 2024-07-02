@@ -23,7 +23,7 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public List<Category> getAll() {
-		return dao.findAll();
+		return dao.findAllByOrderByName();
 	}
 
 	@Override

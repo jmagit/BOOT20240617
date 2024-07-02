@@ -1,22 +1,33 @@
 package com.example;
 
-import java.math.BigDecimal;
+import java.util.TreeMap;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springdoc.core.customizers.OpenApiCustomizer;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
-import com.example.domains.contracts.repositories.FilmRepository;
-import com.example.domains.contracts.services.FilmService;
-import com.example.domains.entities.Actor;
-import com.example.domains.entities.Category;
-import com.example.domains.entities.Film;
-import com.example.domains.entities.Film.Rating;
-import com.example.domains.entities.Language;
-
+import io.swagger.v3.oas.annotations.ExternalDocumentation;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.info.Contact;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.info.License;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import jakarta.transaction.Transactional;
 
+@OpenAPIDefinition(
+        info = @Info(
+                title = "Microservicio: Catalogo de peliculas",
+                version = "1.0",
+                description = "Ejemplo de Microservicio utilizando la base de datos **Sakila**.",
+                license = @License(name = "Apache 2.0", url = "https://www.apache.org/licenses/LICENSE-2.0.html"),
+                contact = @Contact(name = "Javier Martín", url = "https://github.com/jmagit", email = "support@example.com")
+        ),
+        externalDocs = @ExternalDocumentation(description = "Documentación del proyecto", url = "https://github.com/jmagit/REM20230911")
+)
+@SecurityScheme(name = "bearerAuth", type = SecuritySchemeType.HTTP, scheme = "bearer", bearerFormat = "JWT")
 @SpringBootApplication
 public class CatalogoApplication implements CommandLineRunner {
 
@@ -57,5 +68,13 @@ public class CatalogoApplication implements CommandLineRunner {
 //				builder.greaterThan(root.get("rentalDuration"), 5))
 //			).forEach(System.out::println);
 	}
+
+    @Bean
+    OpenApiCustomizer sortSchemasAlphabetically() {
+        return openApi -> {
+            var schemas = openApi.getComponents().getSchemas();
+            openApi.getComponents().setSchemas(new TreeMap<>(schemas));
+        };
+    }
 
 }
