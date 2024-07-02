@@ -24,6 +24,11 @@ Accept: application/xml
 
 ###
 
+get http://localhost:8001/api/actores/v1/222
+Accept: application/pdf,application/json
+
+###
+
 get http://localhost:8001/api/actores/v1/1/pelis
 Accept: application/pdf,application/json
 

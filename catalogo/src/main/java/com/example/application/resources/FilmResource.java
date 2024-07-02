@@ -105,10 +105,17 @@ public class FilmResource {
 			Integer maxlength, 
 			@Schema(description = "La clasificación por edades asignada a la película", allowableValues = {"G", "PG", "PG-13", "R", "NC-17"})
 			@Pattern(regexp = "^(G|PG|PG-13|R|NC-17)$")
-			String rating
+			String rating,
+			@Schema(description = "Duración máxima de la pelicula", type = "string", allowableValues = {
+					"details", "short" }, defaultValue = "short")
+			String mode
 			) {}
+
+	@Operation(summary = "Consulta filtrada de peliculas")
 	@GetMapping("/search")
-	public List<FilmShortDTO> search(@ParameterObject @Valid Search filter) throws BadRequestException {
+	public List search(@ParameterObject @Valid Search filter) throws BadRequestException {
+		if(filter.minlength != null && filter.maxlength != null && filter.minlength > filter.maxlength)
+				throw new BadRequestException("la duración máxima debe ser superior a la mínima");
 		Specification<Film> spec = null;
 		if(filter.title != null && !"".equals(filter.title)) {
 			Specification<Film> cond = (root, query, builder) -> builder.like(root.get("title"), "%" + filter.title.toUpperCase() + "%");
@@ -121,16 +128,21 @@ public class FilmResource {
 			spec = spec == null ? cond : spec.and(cond);
 		}
 		if(filter.minlength != null) {
-			Specification<Film> cond = (root, query, builder) -> builder.greaterThan(root.get("length"), filter.minlength);
+			Specification<Film> cond = (root, query, builder) -> builder.greaterThanOrEqualTo(root.get("length"), filter.minlength);
 			spec = spec == null ? cond : spec.and(cond);
 		}
 		if(filter.maxlength != null) {
-			Specification<Film> cond = (root, query, builder) -> builder.lessThan(root.get("length"), filter.maxlength);
+			Specification<Film> cond = (root, query, builder) -> builder.lessThanOrEqualTo(root.get("length"), filter.maxlength);
 			spec = spec == null ? cond : spec.and(cond);
 		}
 		if(spec == null)
 			throw new BadRequestException("Faltan los parametros de filtrado");
-		return srv.getAll(spec).stream().map(e -> FilmShortDTO.from(e)).toList();
+		var query = srv.getAll(spec).stream();
+		if("short".equals(filter.mode))
+			return query.map(e -> FilmShortDTO.from(e)).toList();
+		else {
+			return query.map(e -> FilmDetailsDTO.from(e)).toList();
+		}
 	}
 
 	@GetMapping(path = "/{id}", params = "mode=short")
