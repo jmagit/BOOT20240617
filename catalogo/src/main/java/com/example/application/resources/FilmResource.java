@@ -1,13 +1,9 @@
 package com.example.application.resources;
 
 import java.net.URI;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.Pattern;
 
 import org.springdoc.core.annotations.ParameterObject;
 import org.springdoc.core.converters.models.PageableAsQueryParam;
@@ -26,7 +22,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -51,8 +46,10 @@ import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Pattern;
 
 @RestController
 @Tag(name = "peliculas-service", description = "Mantenimiento de peliculas")
@@ -113,7 +110,7 @@ public class FilmResource {
 
 	@Operation(summary = "Consulta filtrada de peliculas")
 	@GetMapping("/search")
-	public List search(@ParameterObject @Valid Search filter) throws BadRequestException {
+	public List<?> search(@ParameterObject @Valid Search filter) throws BadRequestException {
 		if(filter.minlength != null && filter.maxlength != null && filter.minlength > filter.maxlength)
 				throw new BadRequestException("la duración máxima debe ser superior a la mínima");
 		Specification<Film> spec = null;

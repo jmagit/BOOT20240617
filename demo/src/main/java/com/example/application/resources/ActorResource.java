@@ -28,7 +28,6 @@ import com.example.exceptions.BadRequestException;
 import com.example.exceptions.DuplicateKeyException;
 import com.example.exceptions.InvalidDataException;
 import com.example.exceptions.NotFoundException;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -43,11 +42,11 @@ public class ActorResource {
 	}
 	
 	@GetMapping
-	public List getAll(@RequestParam(required = false, defaultValue = "largo") String modo) {
+	public List<?> getAll(@RequestParam(required = false, defaultValue = "largo") String modo) {
 		if("short".equals(modo))
 			return srv.getByProjection(ActorShort.class);
 		else
-			return srv.getAll(); // srv.getByProjection(ActorDTO.class);
+			return srv.getByProjection(ActorDTO.class); // srv.getAll();
 	}
 	
 	@GetMapping(params = "page")

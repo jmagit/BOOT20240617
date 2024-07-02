@@ -42,7 +42,7 @@ public class ActorResource {
 	}
 	
 	@GetMapping(path = "/v1")
-	public List getAll(@RequestParam(required = false, defaultValue = "largo") String modo) {
+	public List<?> getAll(@RequestParam(required = false, defaultValue = "largo") String modo) {
 		if("short".equals(modo))
 			return srv.getByProjection(ActorShort.class);
 		else

@@ -29,7 +29,6 @@ public class ApiExceptionHandler {
 	// Content-Type: application/problem+json
 	@JsonInclude(value = Include.NON_EMPTY)
 	public static class ErrorMessage extends ProblemDetail {
-		private static final long serialVersionUID = 1L;
 		private Map<String, String> errors;
 
 		public ErrorMessage(int status, String title) {

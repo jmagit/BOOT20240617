@@ -1,7 +1,5 @@
 package com.example.domains.entities.models;
 
-import java.io.Serializable;
-
 import com.example.domains.entities.Actor;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -9,7 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data @AllArgsConstructor
-public class ActorDTO implements Serializable {
+public class ActorDTO {
 	@JsonProperty("id")
 	private int actorId;
 	@JsonProperty("nombre")
