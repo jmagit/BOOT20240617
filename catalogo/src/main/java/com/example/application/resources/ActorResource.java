@@ -46,7 +46,7 @@ public class ActorResource {
 		if("short".equals(modo))
 			return srv.getByProjection(ActorShort.class);
 		else
-			return srv.getAll(); // srv.getByProjection(ActorDTO.class);
+			return srv.getByProjection(ActorDTO.class); // srv.getAll();;
 	}
 	
 	@GetMapping(path = "/v2")
