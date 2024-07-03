@@ -43,8 +43,14 @@ class ActorResourceTest {
 	@Autowired
 	ObjectMapper objectMapper;
 	
+	List<Actor> table;
+	
 	@BeforeEach
 	void setUp() throws Exception {
+		table = new ArrayList<>(
+		        Arrays.asList(new Actor(1, "Pepito", "Grillo"),
+		        		new Actor(2, "Carmelo", "Coton"),
+		        		new Actor(3, "Capitan", "Tan")));
 	}
 
 	@AfterEach
@@ -59,10 +65,15 @@ class ActorResourceTest {
 	
 	@Test
 	void testGetAllString() throws Exception {
-		List<ActorShort> lista = new ArrayList<>(
-		        Arrays.asList(new ActorShortMock(1, "Pepito Grillo"),
-		        		new ActorShortMock(2, "Carmelo Coton"),
-		        		new ActorShortMock(3, "Capitan Tan")));
+		List<ActorShort> lista = 
+				table.stream().map(o -> (ActorShort) new ActorShortMock(
+						o.getActorId(), 
+						o.getFirstName() + " " + o.getLastName()
+						)).toList();
+//				new ArrayList<>(
+//		        Arrays.asList(new ActorShortMock(1, "Pepito Grillo"),
+//		        		new ActorShortMock(2, "Carmelo Coton"),
+//		        		new ActorShortMock(3, "Capitan Tan")));
 		when(srv.getByProjection(ActorShort.class)).thenReturn(lista);
 		mockMvc.perform(get("/api/actores/v1?modo=short").accept(MediaType.APPLICATION_JSON))
 			.andExpectAll(
