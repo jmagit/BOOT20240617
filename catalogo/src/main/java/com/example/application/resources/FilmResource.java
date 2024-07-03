@@ -109,7 +109,7 @@ public class FilmResource {
 			) {}
 
 	@Operation(summary = "Consulta filtrada de peliculas")
-	@GetMapping("/search")
+	@GetMapping("/filtro")
 	public List<?> search(@ParameterObject @Valid Search filter) throws BadRequestException {
 		if(filter.minlength != null && filter.maxlength != null && filter.minlength > filter.maxlength)
 				throw new BadRequestException("la duración máxima debe ser superior a la mínima");
