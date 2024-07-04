@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -45,6 +44,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.transaction.Transactional;
@@ -64,10 +64,14 @@ public class FilmResource {
 		return srv.getByProjection(pageable, FilmShortDTO.class);
 	}
 
-	@Operation(summary = "Listado de las peliculas", description = "Recupera la lista de peliculas en formato corto o detallado, se puede paginar.", parameters = {
-			@Parameter(in = ParameterIn.QUERY, name = "mode", required = false, description = "Formato de las peliculas", schema = @Schema(type = "string", allowableValues = {
-					"details", "short" }, defaultValue = "short")) }, responses = {
-							@ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json", schema = @Schema(anyOf = {
+	@Operation(summary = "Listado de las peliculas", 
+			description = "Recupera la lista de peliculas en formato corto o detallado, se puede paginar.",
+			parameters = {
+					@Parameter(in = ParameterIn.QUERY, name = "mode", required = false, description = "Formato de las peliculas", 
+								schema = @Schema(type = "string", allowableValues = {"details", "short" }, defaultValue = "short")) }, 
+			responses = {
+					@ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json", 
+							schema = @Schema(anyOf = {
 									FilmShortDTO.class, FilmDetailsDTO.class }))) })
 	@GetMapping(params = { "page", "mode=details" })
 	@PageableAsQueryParam
@@ -144,10 +148,13 @@ public class FilmResource {
 
 	@GetMapping(path = "/{id}", params = "mode=short")
 	public FilmShortDTO getOneCorto(
-			@Parameter(description = "Identificador de la pelicula", required = true) @PathVariable int id,
+			@Parameter(description = "Identificador de la pelicula", required = true) 
+			@PathVariable 
+			int id,
 			@Parameter(required = false, allowEmptyValue = true, schema = @Schema(type = "string", allowableValues = {
-					"details", "short",
-					"edit" }, defaultValue = "edit")) @RequestParam(required = false, defaultValue = "edit") String mode)
+					"details", "short", "edit" }, defaultValue = "edit")) 
+			@RequestParam(required = false, defaultValue = "edit") 
+			String mode)
 			throws Exception {
 		Optional<Film> rslt = srv.getOne(id);
 		if (rslt.isEmpty())
@@ -230,7 +237,7 @@ public class FilmResource {
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
 	@Transactional
-	public ResponseEntity<Object> add(@RequestBody FilmEditDTO item) throws Exception {
+	public ResponseEntity<Object> add(@RequestBody() FilmEditDTO item) throws Exception {
 		Film newItem = srv.add(FilmEditDTO.from(item));
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(newItem.getFilmId()).toUri();
