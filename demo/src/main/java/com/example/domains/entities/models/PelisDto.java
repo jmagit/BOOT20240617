@@ -5,6 +5,6 @@ import lombok.Value;
 
 @Data
 public class PelisDto {
-    private int filmId;
-    private String title;
+    private int id;
+    private String titulo;
 }

@@ -6,6 +6,7 @@ import org.springdoc.core.customizers.OpenApiCustomizer;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
@@ -28,6 +29,7 @@ import jakarta.transaction.Transactional;
         externalDocs = @ExternalDocumentation(description = "Documentación del proyecto", url = "https://github.com/jmagit/REM20230911")
 )
 @SecurityScheme(name = "bearerAuth", type = SecuritySchemeType.HTTP, scheme = "bearer", bearerFormat = "JWT")
+@EnableFeignClients("com.example.application.proxies")
 @SpringBootApplication
 public class CatalogoApplication implements CommandLineRunner {
 

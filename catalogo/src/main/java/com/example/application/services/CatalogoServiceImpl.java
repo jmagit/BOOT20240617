@@ -1,4 +1,4 @@
-package com.example.application.service;
+package com.example.application.services;
 
 import java.sql.Timestamp;
 import java.time.Instant;

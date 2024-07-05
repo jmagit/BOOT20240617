@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -41,6 +42,8 @@ import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.micrometer.observation.annotation.Observed;
 //import io.micrometer.tracing.Tracer;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
 /**
@@ -53,13 +56,6 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 @RestController
 @RequestMapping(path = "/cotilla")
 public class CotillaResource {
-	@Autowired
-	RestTemplate srv;
-
-	@Autowired
-	@LoadBalanced
-	RestTemplate srvLB;
-
 	@Autowired
 	private EurekaClient discoveryEurekaClient;
 
@@ -77,6 +73,34 @@ public class CotillaResource {
 	    return discoveryClient.getInstances(nombre);
 	}
 	
+	@Autowired
+	RestTemplate restTemplate;
+
+	@Autowired
+	@LoadBalanced
+	RestTemplate restTemplateLB;
+
+	@GetMapping(path = "/consulta/pelis/rt")
+	public List<PelisDto> getPelisRT(@RequestParam(defaultValue = "http")
+	@Parameter(in = ParameterIn.QUERY, name = "mode", required = false, description = "http: Directo a URL, lb: Balanceo de carga", 
+	schema = @Schema(type = "string", allowableValues = {"http", "lb" }, defaultValue = "http")) String mode) {
+		ResponseEntity<List<PelisDto>> response = ("http".equals(mode)?restTemplate:restTemplateLB).exchange(
+				("http".equals(mode)?"http://localhost:8010":"lb://CATALOGO-SERVICE") + "/peliculas/v1?mode=short", 
+				HttpMethod.GET,
+				HttpEntity.EMPTY, 
+				new ParameterizedTypeReference<List<PelisDto>>() {}
+		);
+		return response.getBody();
+	}
+	@GetMapping(path = "/consulta/pelis/{id}/rt")
+	public PelisDto getPelisRT(@PathVariable int id, @RequestParam(defaultValue = "http")
+	@Parameter(in = ParameterIn.QUERY, name = "mode", required = false, description = "http: Directo a URL, lb: Balanceo de carga", 
+			schema = @Schema(type = "string", allowableValues = {"http", "lb" }, defaultValue = "http")) String mode) {
+		if("http".equals(mode))
+			return restTemplate.getForObject("http://localhost:8010/peliculas/v1/{key}?mode=short", PelisDto.class, id);
+		else
+			return restTemplateLB.getForObject("lb://CATALOGO-SERVICE/peliculas/v1/{key}?mode=short", PelisDto.class, id);
+	}
 	@GetMapping(path = "/balancea/rt")
 	@SecurityRequirement(name = "bearerAuth")
 	public List<String> getBalanceoRT() {
@@ -86,7 +110,7 @@ public class CotillaResource {
 		for(int i = 0; i < 11; i++)
 			try {
 				LocalTime ini = LocalTime.now();
-				rslt.add(srvLB.getForObject("lb://CATALOGO-SERVICE/actuator/info", String.class)
+				rslt.add(restTemplateLB.getForObject("lb://CATALOGO-SERVICE/actuator/info", String.class)
 						+ " (" + ini.until(LocalTime.now(), ChronoUnit.MILLIS) + " ms)" );
 			} catch (Exception e) {
 				rslt.add(e.getMessage());
@@ -95,27 +119,20 @@ public class CotillaResource {
 		rslt.add("Final: " + fin + " (" + inicio.until(fin, ChronoUnit.MILLIS) + " ms)");		
 		return rslt;
 	}
-	@GetMapping(path = "/pelis/rt")
-	public List<PelisDto> getPelisRT() {
-//		ResponseEntity<List<PelisDto>> response = srv.exchange(
-//				"http://localhost:8010/peliculas/v1?mode=short", 
-		ResponseEntity<List<PelisDto>> response = srvLB.exchange(
-				"lb://CATALOGO-SERVICE/peliculas/v1?mode=short", 
-				HttpMethod.GET,
-				HttpEntity.EMPTY, 
-				new ParameterizedTypeReference<List<PelisDto>>() {}
-		);
-		return response.getBody();
-	}
-	@GetMapping(path = "/pelis/{id}/rt")
-	public PelisDto getPelisRT(@PathVariable int id) {
-		return srvLB.getForObject("lb://CATALOGO-SERVICE/peliculas/v1/{key}?mode=short", PelisDto.class, id);
-//		return srv.getForObject("http://localhost:8010/peliculas/v1/{key}?mode=short", PelisDto.class, id);
-	}
 	
 	@Autowired
 	CatalogoProxy proxy;
 
+	@GetMapping(path = "/consulta/pelis/proxy")
+	public List<PelisDto> getPelisProxy() {
+		return proxy.getPelis();
+	}
+//	@PreAuthorize("hasRole('ADMINISTRADORES')")
+	@SecurityRequirement(name = "bearerAuth")
+	@GetMapping(path = "/consulta/pelis/{id}/proxy")
+	public PelisDto getPelisProxy(@PathVariable int id) {
+		return proxy.getPeli(id);
+	}
 	@GetMapping(path = "/balancea/proxy")
 	public List<String> getBalanceoProxy() {
 		List<String> rslt = new ArrayList<>();
@@ -126,16 +143,6 @@ public class CotillaResource {
 				rslt.add(e.getMessage());
 			}
 		return rslt;
-	}
-	@GetMapping(path = "/pelis/proxy")
-	public List<PelisDto> getPelisProxy() {
-		return proxy.getPelis();
-	}
-//	@PreAuthorize("hasRole('ADMINISTRADORES')")
-	@SecurityRequirement(name = "bearerAuth")
-	@GetMapping(path = "/pelis/{id}/proxy")
-	public PelisDto getPelisProxy(@PathVariable int id) {
-		return proxy.getPeli(id);
 	}
 
 	@Autowired
@@ -149,7 +156,7 @@ public class CotillaResource {
 		for(int i = 0; i < 100; i++) {
 				LocalTime ini = LocalTime.now();
 				rslt.add(cbFactory.create("slow").run(
-						() -> srvLB.getForObject("lb://CATALOGO-SERVICE/actuator/info", String.class), 
+						() -> restTemplateLB.getForObject("lb://CATALOGO-SERVICE/actuator/info", String.class), 
 						throwable -> "fallback: circuito abierto")
 						+ " (" + ini.until(LocalTime.now(), ChronoUnit.MILLIS) + " .ms)" );
 			}
@@ -173,11 +180,11 @@ public class CotillaResource {
 	
 	@CircuitBreaker(name = "default", fallbackMethod = "fallback")
 	private String getInfo(LocalTime ini) {
-		return srvLB.getForObject("lb://CATALOGO-SERVICE/loteria", String.class)
+		return restTemplateLB.getForObject("lb://CATALOGO-SERVICE/loteria", String.class)
 		+ " (" + ini.until(LocalTime.now(), ChronoUnit.MILLIS) + " ms)";
-//		return srv.getForObject("http://localhost:8010/actuator/info", String.class)
+//		return restTemplate.getForObject("http://localhost:8010/actuator/info", String.class)
 //						+ " (" + ini.until(LocalTime.now(), ChronoUnit.MILLIS) + " ms)";
-//		return srvLB.getForObject("lb://CATALOGO-SERVICE/actuator/info", String.class)
+//		return restTemplateLB.getForObject("lb://CATALOGO-SERVICE/actuator/info", String.class)
 //				+ " (" + ini.until(LocalTime.now(), ChronoUnit.MILLIS) + " ms)";
 	}
 	private List<String> fallback(CallNotPermittedException e) {
@@ -224,7 +231,7 @@ public class CotillaResource {
 //	@PreAuthorize("hasRole('ADMINISTRADORES')")
 //	@PreAuthorize("authenticated")
 	@SecurityRequirement(name = "bearerAuth")
-	@PostMapping(path = "/pelis/{id}/like")
+	@PostMapping(path = "/send/pelis/{id}/like")
 //	@Observed(name = "enviar.megusta", contextualName = "enviar-megusta", lowCardinalityKeyValues = {"megustaType", "pelicula"})
 	public String getPelisLike(@PathVariable int id, @Parameter(hidden = true) @RequestHeader(required = false) String authorization) {
 //		var span = tracer.nextSpan().name("send-like").start();

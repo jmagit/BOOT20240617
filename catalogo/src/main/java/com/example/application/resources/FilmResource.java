@@ -21,12 +21,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.example.application.proxies.MeGustaProxy;
 import com.example.domains.contracts.services.FilmService;
 import com.example.domains.entities.Category;
 import com.example.domains.entities.Film;
@@ -46,6 +48,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -267,8 +270,8 @@ public class FilmResource {
 		srv.deleteById(id);
 	}
 
-//	@Autowired
-//	MeGustaProxy proxy;
+	@Autowired
+	MeGustaProxy proxy;
 
 //	@Operation(summary = "Enviar un me gusta")
 //	@ApiResponse(responseCode = "200", description = "Like enviado")
@@ -279,14 +282,14 @@ public class FilmResource {
 //	}
 
 //	@PreAuthorize("hasRole('ADMINISTRADORES')")
-//	@Operation(summary = "Enviar un me gusta")
-//	@ApiResponse(responseCode = "200", description = "Like enviado")
-//	@SecurityRequirement(name = "bearerAuth")
-//	@PostMapping(path = "{id}/like")
-//	public String like(@Parameter(description = "Identificador de la pelicula", required = true) @PathVariable int id,
-//			@Parameter(hidden = true) @RequestHeader(required = false) String authorization) throws Exception {
-//		if (authorization == null)
-//			return proxy.sendLike(id);
-//		return proxy.sendLike(id, authorization);
-//	}
+	@Operation(summary = "Enviar un me gusta")
+	@ApiResponse(responseCode = "200", description = "Like enviado")
+	@SecurityRequirement(name = "bearerAuth")
+	@PostMapping(path = "{id}/like")
+	public String like(@Parameter(description = "Identificador de la pelicula", required = true) @PathVariable int id,
+			@Parameter(hidden = true) @RequestHeader(required = false) String authorization) throws Exception {
+		if (authorization == null)
+			return proxy.sendLike(id);
+		return proxy.sendLike(id, authorization);
+	}
 }
