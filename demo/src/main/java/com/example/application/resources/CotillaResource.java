@@ -16,8 +16,8 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 //import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,17 +26,15 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import com.example.domains.entities.models.PelisDto;
-import com.example.domains.entities.models.PhotoDTO;
 import com.example.application.proxies.CatalogoProxy;
 import com.example.application.proxies.PhotoProxy;
+import com.example.domains.entities.models.PelisDto;
+import com.example.domains.entities.models.PhotoDTO;
 import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
 
-import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import io.github.resilience4j.circuitbreaker.CallNotPermittedException;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.micrometer.observation.annotation.Observed;
@@ -127,7 +125,7 @@ public class CotillaResource {
 	public List<PelisDto> getPelisProxy() {
 		return proxy.getPelis();
 	}
-//	@PreAuthorize("hasRole('ADMINISTRADORES')")
+	@PreAuthorize("hasRole('ADMINISTRADORES')")
 	@SecurityRequirement(name = "bearerAuth")
 	@GetMapping(path = "/consulta/pelis/{id}/proxy")
 	public PelisDto getPelisProxy(@PathVariable int id) {
@@ -229,7 +227,7 @@ public class CotillaResource {
 //	Tracer tracer;
 	
 //	@PreAuthorize("hasRole('ADMINISTRADORES')")
-//	@PreAuthorize("authenticated")
+	@PreAuthorize("authenticated")
 	@SecurityRequirement(name = "bearerAuth")
 	@PostMapping(path = "/send/pelis/{id}/like")
 //	@Observed(name = "enviar.megusta", contextualName = "enviar-megusta", lowCardinalityKeyValues = {"megustaType", "pelicula"})
