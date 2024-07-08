@@ -1,33 +1,103 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ejemplos</title>
 </head>
+
 <body>
     <h1>Ejemplos JavaScript</h1>
     <script>
-        t = [10, 20, 30]
-        t[7] = "70" 
-        t.push("último")
-        t.splice(0,2)
-        for(i in t)
-            console.log(i)
-        for(i=0; i < t.length; i++)
-             console.log(t[i])
-        o = { x: 1, y: 5}
-        o.z = 7
-        o.m = () => console.log("Hola mundo")
-        delete o.y
-        for(i in o)
-            console.log(i)
-        metodo = 'm'
-        // o.metodo()
-        o[metodo]()
-        t[10] = o.m;
-        t[10]()
+        // t = [10, 20, 30]
+        // t[7] = "70"
+        // t.push("último")
+        // t.splice(0, 2)
+        // for (i in t)
+        //     console.log(i)
+        // for (i = 0; i < t.length; i++)
+        //     console.log(t[i])
+        // o = { x: 1, y: 5 }
+        // o.z = 7
+        // o.m = () => console.log("Hola mundo")
+        // delete o.y
+        // for (i in o)
+        //     console.log(i)
+        // metodo = 'm'
+        // // o.metodo()
+        // o[metodo]()
+        // t[10] = o.m;
+        // t[10]()
+        // function MiClase(elId, elNombre) {
+        //     var attr = this
+        //     this.id = elId;
+        //     this.nombre = elNombre;
+        //     // this.prototype.cont++
+        //     // this.muestraId = function () {
+        //     //     console.log("El ID del objeto es " + this.id);
+        //     // }
+        //     // this.ponNombre = function (nom) {
+        //     //     this.nombre = nom.toUpperCase();
+        //     // }
+        //     this.muestraId = function () {
+        //         console.log("El ID del objeto es " + attr.id);
+        //     }
+        // }
+        // MiClase.prototype.cont = 0
+        // MiClase.prototype.muestraId = function () {
+        //     console.log("El ID del objeto es " + this.id);
+        // }
+        // MiClase.prototype.ponNombre = function (nom) {
+        //     this.nombre = nom.toUpperCase();
+        // }
 
+        // class Persona {
+        //     constructor(id, nombre) {
+        //         this.id = id
+        //         this.nombre = nombre
+        //     }
+        //     muestraId() {
+        //         console.log("El ID del objeto es " + this.id);
+        //     }
+        //     ponNombre(nom) {
+        //         this.nombre = nom.toUpperCase();
+        //     }
+        // }
+        // var o1 = new MiClase("99", "Objeto de prueba");
+        // var o2 = new MiClase("6", "Otro de prueba");
+        // o1 = new Persona("99", "Objeto de prueba");
+        // o2 = new Persona("6", "Otro de prueba");
+        // console.log(o1.muestraId == o2.muestraId)
+        // o1.muestraId()
+        // o2.muestraId()
+        // var id = 66666
+        // o1.muestraId = () => console.log("El ID del objeto es " + this.id);
+        // // delete o1.muestraId
+        // MiClase.prototype.muestraId = () => console.log("Hola mundo")
+        // o1.muestraId()
+        // o2.muestraId.call(o1)
+        // console.log(o1.muestraId == o2.muestraId)
+        // console.log(++o1.cont, o2.cont++)
+        // console.log(typeof MiClase, typeof Persona)
     </script>
+    <script src="./ejemplos1.js" ></script>
+    <script>
+        console.log(typeof MiClase, typeof Persona)
+        // MiClase = 5;
+        console.log(typeof MiClase, typeof Persona)
+        let kk;
+        if(kk && kk.nombre && kk.nombre.uppercase() === "KK") {
+
+        }
+        if(kk?.nombre?.uppercase() === "KK") {
+            
+        }
+        var x = a || b
+        x = nombre && nombre.uppercase()
+        var d = (kk ?? "").uppercase()// kk != null ? kk : ""
+    </script>
+    <script src="./ejemplos2.js" ></script>
 </body>
+
 </html>
