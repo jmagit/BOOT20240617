@@ -5,11 +5,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ejemplos</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
 </head>
 
 <body>
-    <h1>Ejemplos JavaScript</h1>
+    <main class="container-fluid">
+        <h1>Ejemplos JavaScript</h1>
+        <div>
+            <input type="text" name="nombre" value="mundo">
+            <button type="button">Saluda</button>
+        </div>
+        <div>
+            <output id="salida"></output>
+        </div>
+    </main>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        let txt = document.querySelector('input[name=nombre]')
+        document.querySelector('button').addEventListener('click', ev => {
+            salida.textContent = `Hola ${txt.value}`
+        })
         // t = [10, 20, 30]
         // t[7] = "70"
         // t.push("último")
@@ -81,23 +97,23 @@
         // console.log(++o1.cont, o2.cont++)
         // console.log(typeof MiClase, typeof Persona)
     </script>
-    <script src="./ejemplos1.js" ></script>
+    <script src="./ejemplos1.js"></script>
     <script>
         console.log(typeof MiClase, typeof Persona)
         // MiClase = 5;
         console.log(typeof MiClase, typeof Persona)
         let kk;
-        if(kk && kk.nombre && kk.nombre.uppercase() === "KK") {
+        if (kk && kk.nombre && kk.nombre.uppercase() === "KK") {
 
         }
-        if(kk?.nombre?.uppercase() === "KK") {
-            
+        if (kk?.nombre?.uppercase() === "KK") {
+
         }
         var x = a || b
         x = nombre && nombre.uppercase()
         var d = (kk ?? "").uppercase()// kk != null ? kk : ""
     </script>
-    <script src="./ejemplos2.js" ></script>
+    <script src="./ejemplos2.js"></script>
 </body>
 
 </html>
