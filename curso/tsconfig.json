@@ -22,7 +22,9 @@
     "lib": [
       "ES2022",
       "dom"
-    ]
+    ],
+    "baseUrl": "./",
+    "paths": { "@my/core": ["src/lib/my-core/index.ts"] }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
