@@ -1,4 +1,4 @@
-<h1>Hola {{Nombre | uppercase}}</h1>
+<h1>Hola {{Nombre | elipsis:10 | uppercase}}</h1>
 <p>
   <input type="text" [(ngModel)]="Nombre">
   <input type="button" value="saluda" (click)="saluda()" >
@@ -34,7 +34,7 @@
 <p>
   <select [(ngModel)]="idProvincia" >
     <option value="">--Elige opción--</option>
-    <option *ngFor="let p of listado" [value]="p.id">{{p.nombre}}</option>
+    <option *ngFor="let p of listado" [value]="p.id">{{p.nombre | capitalize}}</option>
   </select>
   Selección: {{idProvincia}}
   <input type="text" value="Tabarnia" #txtProvincia >
