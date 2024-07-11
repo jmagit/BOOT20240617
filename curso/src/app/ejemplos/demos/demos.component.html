@@ -1,4 +1,4 @@
-<h1>Hola {{Nombre}}</h1>
+<h1>Hola {{Nombre | uppercase}}</h1>
 <p>
   <input type="text" [(ngModel)]="Nombre">
   <input type="button" value="saluda" (click)="saluda()" >
@@ -12,7 +12,7 @@
 </p>
 <p [textContent]="resultado">Esto se pierde</p>
 <p [innerHTML]="resultado">Con HTML</p>
-<p>{{fecha}}</p>
+<p>{{fecha | date:'dd/MMM/yyyy'}}</p>
 
 <p [hidden]="!visible">Ahora me ves</p>
 <p *ngIf="visible">Ahora existe</p>
@@ -22,13 +22,13 @@
 <p [class.semivisible]="!visible">Ahora me ves bien</p>
 
 <p>
-  Calcula: 2 + 2 = {{2+2}} = {{calcula(2,2)}}
+  Calcula: 2 + 2 = {{(2+2) | number:'2.2-3'}} = {{calcula(2,2)| currency:'EUR':'symbol':'1.2-2' }}
 </p>
 
 <ul>
-  <li *ngFor="let item of listado; let indice=index; let fondo=odd;"
+  <li *ngFor="let item of listado | slice:-5; let indice=index; let fondo=odd;"
     [style.background-color]="fondo ? 'LightBlue' : 'Lavender'">
-    {{item.nombre}} ({{item.id}}) [Elemento {{indice + 1}} de {{listado.length}}]
+    {{item.nombre | titlecase}} ({{item.id}}) [Elemento {{indice + 1}} de {{listado.length}}]
   </li>
 </ul>
 <p>
@@ -40,3 +40,4 @@
   <input type="text" value="Tabarnia" #txtProvincia >
   <input type="button" value="add" (click)="add(txtProvincia.value)" >
 </p>
+<p>{{listado | json}}</p>
