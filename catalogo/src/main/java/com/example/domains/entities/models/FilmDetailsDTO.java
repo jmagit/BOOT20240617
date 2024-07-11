@@ -40,6 +40,8 @@ public class FilmDetailsDTO {
 	private List<String> actors;
 	@Schema(description = "La lista de categorías asignadas a la película")
 	private List<String> categories;
+	@Schema(description = "Contenido Adicional")
+	private List<String> specialFeatures;
 	
 	public static FilmDetailsDTO from(Film source) {
 		return new FilmDetailsDTO(
@@ -56,7 +58,8 @@ public class FilmDetailsDTO {
 				source.getLanguageVO() == null ? null : source.getLanguageVO().getName(),
 				source.getActors().stream().map(item -> item.getFirstName() + " " + item.getLastName())
 					.sorted().toList(),
-				source.getCategories().stream().map(item -> item.getName()).sorted().toList()
+				source.getCategories().stream().map(item -> item.getName()).sorted().toList(),
+				source.getSpecialFeatures().stream().map(item -> item.getValue()).sorted().toList()
 				);
 	}
 }

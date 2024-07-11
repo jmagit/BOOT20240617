@@ -4,8 +4,13 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.example.domains.core.entities.EntityBase;
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -80,7 +85,31 @@ public class Film extends EntityBase<Film> implements Serializable {
 
 		public static final String[] VALUES = { "G", "PG", "PG-13", "R", "NC-17" };
 	}
+	
+	public static enum SpecialFeature {
+	    Trailers("Trailers"),
+	    Commentaries("Commentaries"),
+	    DeletedScenes("Deleted Scenes"),
+	    BehindTheScenes("Behind the Scenes");
 
+	    String value;
+
+	    SpecialFeature(String value) {
+	        this.value = value;
+	    }
+
+		public String getValue() {
+			return value;
+		}
+
+	    public static SpecialFeature getEnum(String specialFeature) {
+	        return Stream.of(SpecialFeature.values())
+	                .filter(p -> p.getValue().equals(specialFeature))
+	                .findFirst()
+	                .orElseThrow(IllegalArgumentException::new);
+	    }
+	}
+	
 	@Converter
 	private static class RatingConverter implements AttributeConverter<Rating, String> {
 		@Override
@@ -93,7 +122,30 @@ public class Film extends EntityBase<Film> implements Serializable {
 			return value == null ? null : Rating.getEnum(value);
 		}
 	}
+	
+	@Converter
+	private static class SpecialFeatureConverter implements AttributeConverter<Set<SpecialFeature>, String> {
+	    @Override
+	    public String convertToDatabaseColumn(Set<SpecialFeature> attribute) {
+	        if (attribute == null || attribute.size() == 0) {
+	            return null;
+	        }
+	        return attribute.stream()
+	                .map(SpecialFeature::getValue)
+	                .collect(Collectors.joining(","));
+	    }
 
+	    @Override
+	    public Set<SpecialFeature> convertToEntityAttribute(String value) {
+	        if (value == null) {
+	            return EnumSet.noneOf(SpecialFeature.class);
+	        }
+	        return Arrays.stream(value.split(","))
+	                .map(SpecialFeature::getEnum)
+	                .collect(Collectors.toCollection(() -> EnumSet.noneOf(SpecialFeature.class)));
+	    }
+	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "film_id", unique = true, nullable = false)
@@ -139,6 +191,10 @@ public class Film extends EntityBase<Film> implements Serializable {
 	@Size(max = 128)
 	@Column(nullable = false, length = 128)
 	private String title;
+	
+	@Column(name = "special_features")
+	@Convert(converter = SpecialFeatureConverter.class)
+	private Set<SpecialFeature> specialFeatures = EnumSet.noneOf(SpecialFeature.class);
 
 	// bi-directional many-to-one association to Language
 	@ManyToOne
@@ -392,20 +448,17 @@ public class Film extends EntityBase<Film> implements Serializable {
 		removeCategory(new Category(id));
 	}
 
-	public List<FilmActor> getFilmActors() {
-		return filmActors;
+	// Special Features
+	public List<SpecialFeature> getSpecialFeatures() {
+		return specialFeatures.stream().toList();
 	}
 
-	public void setFilmActors(List<FilmActor> filmActors) {
-		this.filmActors = filmActors;
+	public void addSpecialFeatures(SpecialFeature specialFeatures) {
+		this.specialFeatures.add(specialFeatures);
 	}
 
-	public List<FilmCategory> getFilmCategories() {
-		return filmCategories;
-	}
-
-	public void setFilmCategories(List<FilmCategory> filmCategories) {
-		this.filmCategories = filmCategories;
+	public void removeSpecialFeatures(SpecialFeature specialFeatures) {
+		this.specialFeatures.remove(specialFeatures);
 	}
 
 	@Override
@@ -442,6 +495,7 @@ public class Film extends EntityBase<Film> implements Serializable {
 		target.length = length;
 		target.replacementCost = replacementCost;
 		target.rating = rating;
+		target.specialFeatures = EnumSet.copyOf(specialFeatures);
 		// Borra los actores que sobran
 		target.getActors().stream().filter(item -> !getActors().contains(item))
 				.forEach(item -> target.removeActor(item));
