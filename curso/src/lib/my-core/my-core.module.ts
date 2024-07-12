@@ -3,14 +3,15 @@ import { CommonModule } from '@angular/common';
 import { PIPES_CADENAS } from './pipes/cadenas.pipe';
 import { SizerComponent } from './components/sizer.component';
 import GraficoSvgComponent from './components/grafico-svg/grafico-svg.component';
+import { PIPES_NUMERICOS } from './pipes/numericos.pipe';
 
 
 
 @NgModule({
   declarations: [ ],
-  exports: [ PIPES_CADENAS, SizerComponent, GraficoSvgComponent, ],
   imports: [
-    CommonModule, PIPES_CADENAS, SizerComponent, GraficoSvgComponent,
-  ]
+    CommonModule, PIPES_CADENAS, PIPES_NUMERICOS, SizerComponent, GraficoSvgComponent,
+  ],
+  exports: [ PIPES_CADENAS, PIPES_NUMERICOS, SizerComponent, GraficoSvgComponent, ],
 })
 export class MyCoreModule { }

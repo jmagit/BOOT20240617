@@ -1,0 +1,80 @@
+@use "sass:list";
+$sizes: 576px, 768px, 992px, 1200px;
+
+.Calculadora {
+  @mixin tamañoFont($factor: 0.3em) {
+    @for $delta from 0 to list.length($sizes) {
+      @media (min-width: list.nth($sizes, $delta + 1)) {
+        font-size: 1em + ($delta + 1) * $factor !important;
+      }
+    }
+  }
+  $fuente: 18px "Lucida Grande", Helvetica, Arial, sans-serif;
+
+  display: grid;
+  grid-gap: 5px;
+  grid-template-columns: repeat(4, 1fr);
+
+  background-color: #e6f3ff;
+  border-style: outset;
+  padding: 6px;
+  margin: 4px;
+  max-width: 100%;
+  min-width: 150px;
+  font: $fuente;
+
+  @for $delta from 1 to list.length($sizes) {
+    @media (min-width: list.nth($sizes, $delta + 1)) {
+      max-width: 300px + $delta * 200px;
+    }
+  }
+
+  .Pantalla {
+    grid-column: 1 / span 4;
+    background-color: #004000;
+    color: yellow;
+    border-style: inset;
+    text-align: right;
+    padding: 4px;
+    @include tamañoFont(0.5em);
+  }
+
+  .Resumen {
+    grid-column: 1 / span 4;
+    text-align: right;
+    @include tamañoFont(0.3em);
+  }
+  @mixin botones {
+    width: 100%;
+    font: $fuente;
+    @include tamañoFont;
+  }
+
+  .btnDigito {
+    color: navy;
+    @include botones;
+  }
+
+  .btnOperar {
+    color: red;
+    @include botones;
+  }
+}
+
+:host-context(.theme-dark) .Calculadora {
+  background-color: rgb(0, 0, 0) !important;
+  color: white !important;
+}
+
+@for $i from 1 through 12 {
+  .col-#{$i} {
+    grid-column: $i;
+  }
+  @if $i < 12 {
+    @for $s from 2 through 13 - $i {
+      .col-#{$i}x#{$s} {
+        grid-column: $i #{"/"} span $s;
+      }
+    }
+  }
+}

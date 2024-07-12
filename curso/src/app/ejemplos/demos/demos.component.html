@@ -1,3 +1,45 @@
+<app-notification-modal />
+<div class="container theme-dark">
+  <div class="row">
+    <div class="col">
+      <calculadora [SeparadorDecimal]="','" (updated)="ponResultado('IZQ', $event)" />
+    </div>
+    <table class="col table table-striped">
+      <thead>
+        <tr>
+          <th>Nº</th>
+          <th>Calc</th>
+          <th>Resultado</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="3">Idioma: <select [(ngModel)]="idioma">
+              @for (i of idiomas; track i.codigo) {
+                <option [value]="i.codigo">{{i.region}}</option>
+              }
+            </select>
+          </td>
+        </tr>
+      </tfoot>
+      <tbody>
+        @for (r of calculos | slice:-10; track r) {
+          <tr>
+            <td class="text-right">{{r.pos}}</td>
+            <td>{{r.origen}}</td>
+            <td class="text-right">{{r.valor | number:'1.0-8':idioma }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+    <div class="col">
+      <calculadora [init]="valCalculadora" (updated)="ponResultado('DER', $event)"></calculadora>
+    </div>
+  </div>
+  <div class="row">
+    <input type="number" [(ngModel)]="valCalculadora">
+  </div>
+</div>
 <h1>Hola {{Nombre | elipsis:10 | uppercase}}</h1>
 <p>
   <input type="text" [(ngModel)]="Nombre">
@@ -10,9 +52,11 @@
   <input type="button" value="Info" (click)="vm.add('Solo una notificación informativa', vm.NotificationType.info)" >
   <input type="button" value="Log" (click)="vm.add('Para trazar con notificaciones', vm.NotificationType.log)" >
 </p>
-<p [textContent]="resultado">Esto se pierde</p>
-<p [innerHTML]="resultado">Con HTML</p>
-<p>{{fecha | date:'dd/MMM/yyyy'}}</p>
+<app-card header="Ejemplo de Tarjeta" >
+  <p [textContent]="resultado">Esto se pierde</p>
+  <p [innerHTML]="resultado">Con HTML</p>
+  <p>{{fecha | date:'dd/MMM/yyyy'}}</p>
+</app-card>
 
 <p [hidden]="!visible">Ahora me ves</p>
 <p *ngIf="visible">Ahora existe</p>

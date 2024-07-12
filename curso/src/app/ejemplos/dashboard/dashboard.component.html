@@ -1,9 +1,37 @@
 <header>
-  @for(item of menu; track item) {
-    <button type="button" (click)="seleccionar($index)">{{item.texto}}</button>
-  }
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" (click)="seleccionar(0)" (keypress)="seleccionar(0)" tabindex="0"><img class="rounded" src="images/logo.png"
+          alt="Logotipo corporativo" height="60"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarDark"
+        aria-controls="offcanvasNavbarDark" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="offcanvas offcanvas-end text-bg-light" tabindex="-1" id="offcanvasNavbarDark"
+        aria-labelledby="offcanvasNavbarDarkLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasNavbarDarkLabel">Menu</h5>
+          <button type="button" class="btn-close btn-close-black" data-bs-dismiss="offcanvas"
+            aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            @for (item of menu; track item) {
+              <li class="nav-item">
+                <button class="btn btn-link nav-link" data-bs-dismiss="offcanvas" [class.active]="item.componente === actual" type="button"
+                  (click)="seleccionar($index)"><i class="{{item.icono}}"></i> {{item.texto}}</button>
+              </li>
+            }
+          </ul>
+          <!-- <app-login /> -->
+        </div>
+      </div>
+    </div>
+  </nav>
 </header>
+
 <app-notification />
+<!-- <app-ajax-wait /> -->
 <main class="container-fluid">
   <ng-container *ngComponentOutlet="actual" />
 </main>
