@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ErrorMessagePipe } from '@my/core';
+import { ErrorMessagePipe, NIFNIEValidator, TypeValidator, UppercaseValidator } from '@my/core';
 
 @Component({
   selector: 'app-formulario',
   standalone: true,
-  imports: [CommonModule, FormsModule, ErrorMessagePipe, ],
+  imports: [CommonModule, FormsModule, ErrorMessagePipe, NIFNIEValidator, UppercaseValidator, TypeValidator, ],
   templateUrl: './formulario.component.html',
   styleUrl: './formulario.component.css'
 })
