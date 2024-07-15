@@ -1,0 +1,38 @@
+<p>
+  <input type="button" value="add" (click)="add()">
+  <input type="button" value="edit" (click)="edit(0)">
+</p>
+<form #miForm="ngForm">
+  <div>
+    <label for="id" class="form-label">código:</label>
+    <input type="number" class="form-input" id="id" name="id" [(ngModel)]="elemento.id" #id="ngModel">
+  </div>
+  <div>
+    <label for="nombre" class="form-label">nombre:</label>
+    <input type="text" class="form-input" id="nombre" name="nombre" [(ngModel)]="elemento.nombre" #nombre="ngModel">
+  </div>
+  <div>
+    <label for="apellidos" class="form-label">apellidos:</label>
+    <input type="text" class="form-input" id="apellidos" name="apellidos" [(ngModel)]="elemento.apellidos" #apellidos="ngModel">
+  </div>
+  <div>
+    <label for="correo" class="form-label">correo:</label>
+    <input type="email" class="form-input" id="correo" name="correo" [(ngModel)]="elemento.correo" #correo="ngModel">
+  </div>
+  <div>
+    <label for="edad" class="form-label">edad:</label>
+    <input type="number" class="form-input" id="edad" name="edad" [(ngModel)]="elemento.edad" #edad="ngModel">
+  </div>
+  <div>
+    <label for="fecha" class="form-label">fecha:</label>
+    <input type="date" class="form-input" id="fecha" name="fecha" [(ngModel)]="elemento.fecha" #fecha="ngModel">
+  </div>
+  <div>
+    <label for="conflictivo" class="form-label">conflictivo:</label>
+    <input type="checkbox" class="form-input" id="conflictivo" name="conflictivo" [(ngModel)]="elemento.conflictivo" #conflictivo="ngModel">
+  </div>
+  <div>
+    <input type="button" value="enviar" (click)="send()">
+    <input type="button" value="volver" (click)="cancel()">
+  </div>
+</form>

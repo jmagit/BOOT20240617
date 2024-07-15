@@ -5,6 +5,7 @@ import GraficoSvgComponent from 'src/lib/my-core/components/grafico-svg/grafico-
 import { NotificationComponent } from "../../main/notification/notification.component";
 import { CommonModule } from '@angular/common';
 import { CalculadoraComponent } from '../calculadora/calculadora.component';
+import { FormularioComponent } from '../formulario/formulario.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,8 +16,9 @@ import { CalculadoraComponent } from '../calculadora/calculadora.component';
 })
 export class DashboardComponent {
   menu = [
-    { texto: 'demos', icono: 'fa-solid fa-person-chalkboard', componente: DemosComponent},
+    { texto: 'formulario', icono: 'fa-solid fa-person-chalkboard', componente: FormularioComponent},
     { texto: 'inicio', icono: 'fa-solid fa-house', componente: HomeComponent },
+    { texto: 'demos', icono: 'fa-solid fa-person-chalkboard', componente: DemosComponent},
     { texto: 'calculadora', icono: 'fa-solid fa-calculator', componente: CalculadoraComponent },
     { texto: 'gráfico', icono: 'fa-solid fa-image', componente: GraficoSvgComponent },
   ]
