@@ -239,6 +239,10 @@ Comando:
     npm i
     npm start
 
+### Contenedor: Mock REST
+
+    docker run -d -p 4321:4321 --name mock-web-server jamarton/mock-web-server:latest
+
 ### Documentación
 
 - [Oficial](https://angular.dev/)

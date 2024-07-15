@@ -17,5 +17,8 @@ export const appConfig: ApplicationConfig = {
     {provide: LOCALE_ID, useValue: 'es-ES'},
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
+    // { provide: HTTP_INTERCEPTORS, useClass: AjaxWaitInterceptor, multi: true, },
+    // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true, },
+    // provideHttpClient(withInterceptorsFromDi(), withInterceptors([ ajaxWaitInterceptor ])),
   ]
 };

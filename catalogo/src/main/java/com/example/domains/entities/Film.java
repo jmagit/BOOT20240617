@@ -30,6 +30,8 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PostPersist;
+import jakarta.persistence.PostUpdate;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Digits;
@@ -510,12 +512,12 @@ public class Film extends EntityBase<Film> implements Serializable {
 		return target;
 	}
 	
-//	@PostPersist
-//	@PostUpdate
-//	public void prePersiste() {
-//		System.err.println("prePersiste()");
-//		filmActors.forEach(o -> o.prePersiste());
-//		filmCategories.forEach(o -> o.prePersiste());
-//	}
+	@PostPersist
+	@PostUpdate
+	public void prePersiste() {
+		System.err.println("prePersiste(): Bug Hibernate");
+		filmActors.forEach(o -> o.prePersiste());
+		filmCategories.forEach(o -> o.prePersiste());
+	}
 
 }

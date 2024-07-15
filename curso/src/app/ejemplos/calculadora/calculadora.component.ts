@@ -36,7 +36,7 @@ export class CalculadoraComponent implements OnInit, OnChanges {
   get Resumen(): string { return this.miResumen; }
 
   @Input() init: string | number = '0';
-  @Output() updated: EventEmitter<number> = new EventEmitter();
+  @Output() updated: EventEmitter<number> = new EventEmitter<number>();
 
   private separadorDecimal = '.';
   get SeparadorDecimal() { return this.separadorDecimal; }

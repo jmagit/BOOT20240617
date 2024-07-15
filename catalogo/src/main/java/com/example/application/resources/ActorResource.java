@@ -44,9 +44,9 @@ public class ActorResource {
 	@GetMapping(path = "/v1")
 	public List<?> getAll(@RequestParam(required = false, defaultValue = "largo") String modo) {
 		if("short".equals(modo))
-			return srv.getByProjection(ActorShort.class);
+			return (List<?>) srv.getByProjection(Sort.by("firstName", "lastName"), ActorShort.class);
 		else
-			return srv.getByProjection(ActorDTO.class); // srv.getAll();;
+			return (List<?>) srv.getByProjection(Sort.by("firstName", "lastName"), ActorDTO.class); // srv.getAll();;
 	}
 	
 	@GetMapping(path = "/v2")
