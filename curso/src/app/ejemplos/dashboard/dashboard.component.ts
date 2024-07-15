@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HomeComponent } from 'src/app/main';
+import { AjaxWaitComponent, HomeComponent } from 'src/app/main';
 import { DemosComponent } from '../demos/demos.component';
 import GraficoSvgComponent from 'src/lib/my-core/components/grafico-svg/grafico-svg.component';
 import { NotificationComponent } from "../../main/notification/notification.component";
@@ -10,7 +10,7 @@ import { FormularioComponent } from '../formulario/formulario.component';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [NotificationComponent, CommonModule, ],
+  imports: [NotificationComponent, CommonModule, AjaxWaitComponent, ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
