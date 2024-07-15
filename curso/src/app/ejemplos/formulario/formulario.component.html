@@ -5,23 +5,28 @@
 <form #miForm="ngForm">
   <div>
     <label for="id" class="form-label">código:</label>
-    <input type="number" class="form-input" id="id" name="id" [(ngModel)]="elemento.id" #id="ngModel">
+    <input type="number" class="form-input" id="id" name="id" [(ngModel)]="elemento.id" #id="ngModel"
+      required>
   </div>
   <div>
     <label for="nombre" class="form-label">nombre:</label>
-    <input type="text" class="form-input" id="nombre" name="nombre" [(ngModel)]="elemento.nombre" #nombre="ngModel">
+    <input type="text" class="form-input" id="nombre" name="nombre" [(ngModel)]="elemento.nombre" #nombre="ngModel"
+      required minlength="2" maxlength="10">
   </div>
   <div>
     <label for="apellidos" class="form-label">apellidos:</label>
-    <input type="text" class="form-input" id="apellidos" name="apellidos" [(ngModel)]="elemento.apellidos" #apellidos="ngModel">
+    <input type="text" class="form-input" id="apellidos" name="apellidos" [(ngModel)]="elemento.apellidos" #apellidos="ngModel"
+      minlength="2" maxlength="10">
   </div>
   <div>
     <label for="correo" class="form-label">correo:</label>
-    <input type="email" class="form-input" id="correo" name="correo" [(ngModel)]="elemento.correo" #correo="ngModel">
+    <input type="email" class="form-input" id="correo" name="correo" [(ngModel)]="elemento.correo" #correo="ngModel"
+      maxlength="100">
   </div>
   <div>
     <label for="edad" class="form-label">edad:</label>
-    <input type="number" class="form-input" id="edad" name="edad" [(ngModel)]="elemento.edad" #edad="ngModel">
+    <input type="number" class="form-input" id="edad" name="edad" [(ngModel)]="elemento.edad" #edad="ngModel"
+      min="16" max="67">
   </div>
   <div>
     <label for="fecha" class="form-label">fecha:</label>
