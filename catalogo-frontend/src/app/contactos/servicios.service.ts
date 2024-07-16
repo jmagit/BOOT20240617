@@ -138,9 +138,6 @@ export class ContactosViewModelService {
 
   public cancel(): void {
     this.clear()
-    // this.list();
-    // this.load(this.page)
-    // this.router.navigateByUrl(this.listURL);
     this.navigation.back()
   }
   public send(): void {

@@ -11,85 +11,8 @@ import { ContactosViewModelService } from './servicios.service';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-contactos',
-  templateUrl: './tmpl-anfitrion.component.html',
-  styleUrls: ['./componente.component.css'],
-  // providers: [ContactosViewModelService]
-  standalone: true,
-  imports: [
-    forwardRef(() => ContactosAddComponent),
-    forwardRef(() => ContactosEditComponent),
-    forwardRef(() => ContactosViewComponent),
-    forwardRef(() => ContactosListComponent),
-  ],
-})
-export class ContactosComponent implements OnInit, OnDestroy {
-  constructor(protected vm: ContactosViewModelService) { }
-  public get VM(): ContactosViewModelService { return this.vm; }
-  ngOnInit(): void {
-    // this.vm.list();
-    this.vm.load()
-  }
-  ngOnDestroy(): void { this.vm.clear(); }
-}
-
-/*
-@Component({
-  selector: 'app-contactos-list',
-  templateUrl: './tmpl-list.sin-rutas.component.html',
-  styleUrls: ['./componente.component.css'],
-  standalone: true,
-  imports: [PaginatorModule, NgIf, ]
-})
-export class ContactosListComponent implements OnInit, OnDestroy {
-  constructor(protected vm: ContactosViewModelService) { }
-  public get VM(): ContactosViewModelService { return this.vm; }
-  ngOnInit(): void { }
-  ngOnDestroy(): void { }
-}
-@Component({
-  selector: 'app-contactos-add',
-  templateUrl: './tmpl-form.component.html',
-  styleUrls: ['./componente.component.css'],
-  standalone: true,
-  imports: [FormsModule, TypeValidator, ErrorMessagePipe]
-})
-export class ContactosAddComponent implements OnInit {
-  constructor(protected vm: ContactosViewModelService) { }
-  public get VM(): ContactosViewModelService { return this.vm; }
-  ngOnInit(): void { }
-}
-@Component({
-  selector: 'app-contactos-edit',
-  templateUrl: './tmpl-form.component.html',
-  styleUrls: ['./componente.component.css'],
-  standalone: true,
-  imports: [FormsModule, TypeValidator, ErrorMessagePipe]
-})
-export class ContactosEditComponent implements OnInit, OnDestroy {
-  constructor(protected vm: ContactosViewModelService) { }
-  public get VM(): ContactosViewModelService { return this.vm; }
-  ngOnInit(): void { }
-  ngOnDestroy(): void { }
-}
-@Component({
-  selector: 'app-contactos-view',
-  templateUrl: './tmpl-view.component.html',
-  styleUrls: ['./componente.component.css'],
-  standalone: true,
-  imports: [DatePipe]
-})
-export class ContactosViewComponent implements OnInit, OnDestroy {
-  constructor(protected vm: ContactosViewModelService) { }
-  public get VM(): ContactosViewModelService { return this.vm; }
-  ngOnInit(): void { }
-  ngOnDestroy(): void { }
-}
-*/
-
-@Component({
     selector: 'app-contactos-list',
-    templateUrl: './tmpl-list.con-rutas.component.html',
+    templateUrl: './tmpl-list.component.html',
     styleUrls: ['./componente.component.css'],
     standalone: true,
     imports: [RouterLink, PaginatorModule]
@@ -99,10 +22,6 @@ export class ContactosListComponent implements OnChanges, OnDestroy {
 
   constructor(protected vm: ContactosViewModelService) { }
   public get VM(): ContactosViewModelService { return this.vm; }
-  // ngOnInit(): void {
-  //   // this.vm.list();
-  //   this.vm.load()
-  // }
   ngOnChanges(_changes: SimpleChanges): void {
     this.vm.load(this.page)
   }
@@ -170,6 +89,5 @@ export class ContactosViewComponent implements OnChanges {
 }
 
 export const CONTACTOS_COMPONENTES = [
-  // ContactosComponent,
   ContactosListComponent, ContactosAddComponent, ContactosEditComponent, ContactosViewComponent,
 ];

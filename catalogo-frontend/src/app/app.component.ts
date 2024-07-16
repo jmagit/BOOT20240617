@@ -11,6 +11,6 @@ import { NavigationService } from './common-services';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
-  constructor(nav: NavigationService) { }
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  constructor(_nav: NavigationService) { }
 }
