@@ -4,7 +4,7 @@ import localeEsExtra from '@angular/common/locales/extra/es';
 registerLocaleData(localeEs, 'es', localeEsExtra);
 
 import { ApplicationConfig, provideZoneChangeDetection, LOCALE_ID } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withComponentInputBinding } from '@angular/router';
 
 import { routes } from './app.routes';
 import { ERROR_LEVEL, LoggerService } from '@my/core';
@@ -19,7 +19,7 @@ export const appConfig: ApplicationConfig = {
     {provide: ERROR_LEVEL, useValue: environment.ERROR_LEVEL},
     {provide: LOCALE_ID, useValue: 'es-ES'},
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes),
+    provideRouter(routes, withComponentInputBinding()),
     // { provide: HTTP_INTERCEPTORS, useClass: AjaxWaitInterceptor, multi: true, },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true, },
     provideHttpClient(withInterceptorsFromDi(), withInterceptors([ ajaxWaitInterceptor ])),

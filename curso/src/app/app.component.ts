@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { LoggerService } from '@my/core';
 import { AjaxWaitComponent, HeaderComponent, NotificationComponent, NotificationModalComponent } from './main';
 import { DemosComponent } from './ejemplos';
-import { NotificationService, NotificationType } from './common-services';
+import { NavigationService, NotificationService, NotificationType } from './common-services';
 import { HomeComponent } from "./main/home/home.component";
 import { DashboardComponent } from "./ejemplos/dashboard/dashboard.component";
 
@@ -28,4 +28,6 @@ export class AppComponent {
 //  ngOnInit(): void {
 //   this.notify.add('Aplicación arrancada', NotificationType.info)
 //  }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
+  constructor(nav: NavigationService) { }
 }
