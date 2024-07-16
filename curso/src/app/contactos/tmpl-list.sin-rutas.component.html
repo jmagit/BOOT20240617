@@ -2,7 +2,7 @@
   <thead>
     <tr class="table-info">
       <th class="display-4">Lista de contactos</th>
-      <th class="text-end"><button class="btn btn-success" (click)="VM.add()"><i class="fas fa-plus"></i>
+      <th class="text-end"><button class="btn btn-success" *ngIf="VM.auth.isInRoles('Empleados')" (click)="VM.add()"><i class="fas fa-plus"></i>
           Añadir</button></th>
     </tr>
   </thead>

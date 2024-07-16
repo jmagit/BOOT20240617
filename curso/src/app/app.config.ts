@@ -9,8 +9,9 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { ERROR_LEVEL, LoggerService } from '@my/core';
 import { environment } from 'src/environments/environment';
-import { provideHttpClient, withInterceptors, withInterceptorsFromDi } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptors, withInterceptorsFromDi } from '@angular/common/http';
 import { ajaxWaitInterceptor } from './main';
+import { AuthInterceptor } from './security';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -20,7 +21,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     // { provide: HTTP_INTERCEPTORS, useClass: AjaxWaitInterceptor, multi: true, },
-    // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true, },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true, },
     provideHttpClient(withInterceptorsFromDi(), withInterceptors([ ajaxWaitInterceptor ])),
   ]
 };

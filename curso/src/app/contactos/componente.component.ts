@@ -4,7 +4,7 @@
 import { Component, OnInit, OnDestroy, Input, OnChanges, SimpleChanges, forwardRef } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { DatePipe, } from '@angular/common';
+import { DatePipe, NgIf, } from '@angular/common';
 import { PaginatorModule } from 'primeng/paginator';
 import { ErrorMessagePipe, TypeValidator } from '@my/core';
 import { ContactosViewModelService } from './servicios.service';
@@ -39,7 +39,7 @@ export class ContactosComponent implements OnInit, OnDestroy {
   templateUrl: './tmpl-list.sin-rutas.component.html',
   styleUrls: ['./componente.component.css'],
   standalone: true,
-  imports: [PaginatorModule]
+  imports: [PaginatorModule, NgIf, ]
 })
 export class ContactosListComponent implements OnInit, OnDestroy {
   constructor(protected vm: ContactosViewModelService) { }
