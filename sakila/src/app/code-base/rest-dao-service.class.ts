@@ -10,22 +10,23 @@ export abstract class RESTDAOService<T, K> {
   constructor(entidad: string, protected option = {}) {
     this.baseUrl += entidad;
   }
-  query(): Observable<T[]> {
-    return this.http.get<T[]>(this.baseUrl, this.option);
+  query(extras = {}): Observable<T[]> {
+    return this.http.get<T[]>(this.baseUrl, Object.assign({}, this.option, extras));
   }
-  get(id: K): Observable<T> {
-    return this.http.get<T>(`${this.baseUrl}/${id}`, this.option);
+  get(id: K, extras = {}): Observable<T> {
+    return this.http.get<T>(`${this.baseUrl}/${id}`, Object.assign({}, this.option, extras));
   }
-  add(item: T): Observable<T> {
-    return this.http.post<T>(this.baseUrl, item, this.option);
+  add(item: T, extras = {}): Observable<T> {
+    return this.http.post<T>(this.baseUrl, item, Object.assign({}, this.option, extras));
   }
-  change(id: K, item: T): Observable<T> {
-    return this.http.put<T>(`${this.baseUrl}/${id}`, item, this.option);
+  change(id: K, item: T, extras = {}): Observable<T> {
+    return this.http.put<T>(`${this.baseUrl}/${id}`, item, Object.assign({}, this.option, extras));
   }
-  remove(id: K): Observable<T> {
-    return this.http.delete<T>(`${this.baseUrl}/${id}`, this.option);
+  remove(id: K, extras = {}): Observable<T> {
+    return this.http.delete<T>(`${this.baseUrl}/${id}`, Object.assign({}, this.option, extras));
   }
 }
+
 export class DAOServiceMock<T, K> extends RESTDAOService<T, K> {
   private readonly pk: string
   private readonly listado: T[]
@@ -67,7 +68,7 @@ export class DAOServiceMock<T, K> extends RESTDAOService<T, K> {
     this.listado.splice(index, 1)
     return of(item);
   }
-  page(page: number, _rows: number = 20): Observable<{ page: number, pages: number, rows: number, list: Array<any> }> {
+  page(page: number, _rows: number = 20): Observable<{ page: number, pages: number, rows: number, list: any[] }> {
     return of({ page, pages: 1, rows: this.listado.length, list: this.listado });
   }
 

@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/directive-selector */
 import { Directive, ElementRef, forwardRef } from '@angular/core';
 import { ValidatorFn, AbstractControl, NG_VALIDATORS, Validator, ValidationErrors } from '@angular/forms';
 
@@ -25,7 +26,7 @@ export class NIFNIEValidator implements Validator {
 }
 
 export function uppercaseValidator(): ValidatorFn {
-  return (control: AbstractControl): { [key: string]: any } | null => {
+  return (control: AbstractControl): ValidationErrors | null => {
     if (!control.value) { return null; }
     return control.value === control.value.toUpperCase() ? null : { uppercase: 'Tiene que estar en mayúsculas' }
   };
@@ -62,3 +63,21 @@ export class TypeValidator implements Validator {
   }
 }
 
+export function notblankValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    return !control.value || control.value.toString().trim() === '' ? { notblank: 'Requerido, no debe estar en blanco' } : null
+  };
+}
+
+@Directive({
+  selector: '[notblank][formControlName],[notblank][formControl],[notblank][ngModel]',
+  providers: [{ provide: NG_VALIDATORS, useExisting: NotblankValidator, multi: true }],
+  standalone: true
+})
+export class NotblankValidator implements Validator {
+  validate(control: AbstractControl): ValidationErrors | null {
+    return notblankValidator()(control);
+  }
+}
+
+export const MIS_VALIDADORES = [NIFNIEValidator, TypeValidator, UppercaseValidator, NotblankValidator]

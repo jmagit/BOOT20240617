@@ -27,16 +27,25 @@ export class CapitalizePipe implements PipeTransform {
 }
 
 @Pipe({
-    name: 'striptags',
-    standalone: true
+  name: 'striptags',
+  standalone: true
 })
 export class StripTagsPipe implements PipeTransform {
-
   transform(text: string, ...allowedTags: string[]): string {
     const etiquetas = `(?:.|\\s)*?`
     return allowedTags.length > 0
       ? text.replace(new RegExp(`<(?!\\/?(${allowedTags.join('|')})\\s*\\/?)[^>]+>`, 'g'), '')
       : text.replace(new RegExp(`<${etiquetas}>`, 'g'), '');
+  }
+}
+
+@Pipe({
+  name: 'normalize',
+  standalone: true
+})
+export class NormalizePipe implements PipeTransform {
+  transform(text: string): string {
+    return (text??'').normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "-")
   }
 }
 
@@ -70,4 +79,4 @@ export class ErrorMessagePipe implements PipeTransform {
   }
 }
 
-export const PIPES_CADENAS = [ElipsisPipe, CapitalizePipe, StripTagsPipe, ErrorMessagePipe,]
+export const PIPES_CADENAS = [ElipsisPipe, CapitalizePipe, StripTagsPipe, NormalizePipe, ErrorMessagePipe,]

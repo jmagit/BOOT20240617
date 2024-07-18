@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService, LoginComponent } from 'src/app/security';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -11,5 +12,6 @@ import { AuthService, LoginComponent } from 'src/app/security';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-  constructor(public auth: AuthService) { }
+  readonly roleMantenimiento = environment.roleMantenimiento
+  constructor(public auth: AuthService) {}
 }

@@ -1,11 +1,12 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, Injectable, OnInit } from '@angular/core';
+
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
+import { NotificationService } from '../common-services';
+import { PeliculasListBodyComponent } from '../peliculas';
 import { FormsModule } from '@angular/forms';
 import { ErrorMessagePipe, PastOrPresentValidator } from '@my/core';
-import { Observable } from 'rxjs';
-import { NotificationService } from 'src/app/common-services';
-import { PeliculasListBodyComponent } from 'src/app/peliculas';
-import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -20,13 +21,13 @@ export class NovedadesDAOService {
 }
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-novedades',
   standalone: true,
   imports: [PeliculasListBodyComponent, FormsModule, PastOrPresentValidator, ErrorMessagePipe],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  templateUrl: './novedades.component.html',
+  styleUrls: ['./novedades.component.css']
 })
-export class HomeComponent implements OnInit {
+export class NovedadesComponent implements OnInit {
   novedades: any = {}
   fecha = '2021-01-01'
   constructor(private dao: NovedadesDAOService, private notify: NotificationService) {
