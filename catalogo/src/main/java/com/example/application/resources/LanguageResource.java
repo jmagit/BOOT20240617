@@ -40,7 +40,7 @@ public class LanguageResource {
 	@GetMapping
 	@JsonView(Language.Partial.class)
 	public List<Language> getAll() {
-		return dao.findAll();
+		return dao.findAllByOrderByName();
 	}
 
 	@GetMapping(path = "/{id}")

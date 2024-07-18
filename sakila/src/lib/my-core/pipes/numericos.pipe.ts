@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
     standalone: true
 })
 export class ExecPipe implements PipeTransform {
-  // eslint-disable-next-line @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type, @typescript-eslint/no-explicit-any
   transform(fn: Function, ...args: any[]): any {
     return fn(...args);
   }

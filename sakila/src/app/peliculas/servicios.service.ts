@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -17,7 +18,9 @@ export class PeliculasViewModelService extends ViewModelService<any, number> {
     dao: PeliculasDAOService, protected daoIdiomas: IdiomasDAOService, protected daoCategorias: CategoriasDAOService, protected daoActores: ActoresDAOService
   ) {
     super(dao, { rating: 'G' }, notify, out, auth, router, navigation)
-
+    // Soluciona el problema de las clases JavaScript por el cual los métodos pierden la referencia a this cuando se referencian por nombre (ExecPipe)
+    this.dameActor = this.dameActor.bind(this)
+    this.dameCategoria = this.dameCategoria.bind(this)
   }
 
   public override view(key: any): void {

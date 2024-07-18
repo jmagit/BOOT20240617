@@ -509,9 +509,15 @@ public class Film extends EntityBase<Film> implements Serializable {
 		// Añade las categorias que faltan
 		getCategories().stream().filter(item -> !target.getCategories().contains(item))
 				.forEach(item -> target.addCategory(item));
+		
+		// Bug de Hibernate
+		target.filmActors.forEach(o -> o.prePersiste());
+		target.filmCategories.forEach(o -> o.prePersiste());
+		
 		return target;
 	}
 	
+	// Bug de Hibernate
 	@PostPersist
 	@PostUpdate
 	public void prePersiste() {

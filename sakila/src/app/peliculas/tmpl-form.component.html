@@ -95,7 +95,7 @@
       <div class="list-group">
         @for (actor of VM.Elemento.actors; track actor; let indice = $index) {
           <li class="list-group-item">
-            {{VM.dameActor(actor) | titlecase}} <button type="button"
+            {{VM.dameActor | exec:actor | titlecase}} <button type="button"
             class="btn btn-outline-danger position-absolute h-100 top-0 end-0" (click)="VM.removeActor(indice)"><svg
             class="bi" width="16" height="16" role="img" aria-label="borrar">
             <use xlink:href="images/crud-sprite.svg#trash-fill" />
@@ -119,7 +119,7 @@
       <div class="list-group">
         @for (categoria of VM.Elemento.categories; track categoria; let indice = $index) {
           <li class="list-group-item">
-            {{VM.dameCategoria(categoria)}} <button type="button"
+            {{VM.dameCategoria | exec:categoria }} <button type="button"
             class="btn btn-outline-danger position-absolute h-100 top-0 end-0" (click)="VM.removeCategoria(indice)"><svg
             class="bi" width="16" height="16" role="img" aria-label="borrar">
             <use xlink:href="images/crud-sprite.svg#trash-fill" />

@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, Input, OnChanges, SimpleChanges, Output, 
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { PeliculasViewModelService } from './servicios.service';
 
-import { ErrorMessagePipe, NormalizePipe, NotblankValidator, TypeValidator } from '@my/core';
+import { ErrorMessagePipe, ExecPipe, NormalizePipe, NotblankValidator, TypeValidator } from '@my/core';
 import { CommonModule } from '@angular/common';
 import { PaginatorModule } from 'primeng/paginator';
 import { FormsModule } from '@angular/forms';
@@ -63,7 +63,7 @@ export class PeliculasListComponent implements OnChanges, OnDestroy {
   templateUrl: './tmpl-form.component.html',
   styleUrls: ['./componente.component.css'],
   standalone: true,
-  imports: [FormsModule, CommonModule, ErrorMessagePipe, NotblankValidator, TypeValidator, FormButtonsComponent, ]
+  imports: [FormsModule, CommonModule, ErrorMessagePipe, NotblankValidator, TypeValidator, FormButtonsComponent, ExecPipe, ]
 })
 export class PeliculasAddComponent implements OnInit {
   constructor(protected vm: PeliculasViewModelService) { }
@@ -78,7 +78,7 @@ export class PeliculasAddComponent implements OnInit {
   templateUrl: './tmpl-form.component.html',
   styleUrls: ['./componente.component.css'],
   standalone: true,
-  imports: [FormsModule, CommonModule, ErrorMessagePipe, NotblankValidator, TypeValidator, FormButtonsComponent, ]
+  imports: [FormsModule, CommonModule, ErrorMessagePipe, NotblankValidator, TypeValidator, FormButtonsComponent, ExecPipe, ]
 })
 export class PeliculasEditComponent implements OnChanges {
   @Input() id?: string;
