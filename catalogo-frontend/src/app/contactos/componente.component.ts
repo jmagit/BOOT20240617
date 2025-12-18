@@ -10,7 +10,6 @@ import { ContactosViewModelService } from './servicios.service';
     selector: 'app-contactos-list',
     templateUrl: './tmpl-list.component.html',
     styleUrls: ['./componente.component.css'],
-    standalone: true,
     imports: [RouterLink, PaginatorModule]
 })
 export class ContactosListComponent implements OnChanges, OnDestroy {
@@ -27,7 +26,6 @@ export class ContactosListComponent implements OnChanges, OnDestroy {
     selector: 'app-contactos-add',
     templateUrl: './tmpl-form.component.html',
     styleUrls: ['./componente.component.css'],
-    standalone: true,
     imports: [FormsModule, TypeValidator, ErrorMessagePipe]
 })
 export class ContactosAddComponent implements OnInit {
@@ -41,7 +39,6 @@ export class ContactosAddComponent implements OnInit {
     selector: 'app-contactos-edit',
     templateUrl: './tmpl-form.component.html',
     styleUrls: ['./componente.component.css'],
-    standalone: true,
     imports: [FormsModule, TypeValidator, ErrorMessagePipe]
 })
 export class ContactosEditComponent implements OnChanges {
@@ -60,7 +57,6 @@ export class ContactosEditComponent implements OnChanges {
     selector: 'app-contactos-view',
     templateUrl: './tmpl-view.component.html',
     styleUrls: ['./componente.component.css'],
-    standalone: true,
     imports: [DatePipe]
 })
 export class ContactosViewComponent implements OnChanges {

@@ -51,7 +51,6 @@ export class BaseComponent {
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css'],
-    standalone: true,
     imports: [NgIf, FormsModule]
 })
 export class LoginComponent extends BaseComponent implements OnDestroy {
@@ -78,7 +77,6 @@ export class LoginComponent extends BaseComponent implements OnDestroy {
     selector: 'app-login-form',
     templateUrl: './login-form.component.html',
     styleUrls: ['./login.component.css'],
-    standalone: true,
     imports: [NgIf, FormsModule]
 })
 export class LoginFormComponent extends BaseComponent implements OnInit, OnDestroy {

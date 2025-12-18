@@ -10,7 +10,6 @@ import { NgFor } from '@angular/common';
     selector: 'app-register-user',
     templateUrl: './register-user.component.html',
     styleUrls: ['./register-user.component.css'],
-    standalone: true,
     imports: [FormsModule, ReactiveFormsModule, NgFor]
 })
 export class RegisterUserComponent implements OnInit {
