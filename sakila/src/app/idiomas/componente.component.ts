@@ -24,11 +24,10 @@ export class IdiomasViewModelService extends ViewModelService<any, number> {
 }
 
 @Component({
-  selector: 'app-idiomas',
-  templateUrl: './tmpl-anfitrion.component.html',
-  styleUrls: ['./componente.component.css'],
-  standalone: true,
-  imports: [FormsModule, FormButtonsComponent, ErrorMessagePipe, NotblankValidator,],
+    selector: 'app-idiomas',
+    templateUrl: './tmpl-anfitrion.component.html',
+    styleUrls: ['./componente.component.css'],
+    imports: [FormsModule, FormButtonsComponent, ErrorMessagePipe, NotblankValidator,]
 })
 export class IdiomasComponent implements OnInit {
   constructor(protected vm: IdiomasViewModelService) { }

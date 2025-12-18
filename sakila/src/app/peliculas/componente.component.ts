@@ -9,11 +9,10 @@ import { FormsModule } from '@angular/forms';
 import { FormButtonsComponent } from '../common-components';
 
 @Component({
-  selector: 'app-peliculas-list-body',
-  templateUrl: './tmpl-list-body.component.html',
-  styleUrls: ['./componente.component.css'],
-  standalone: true,
-  imports: [RouterLink, NormalizePipe, CommonModule, ]
+    selector: 'app-peliculas-list-body',
+    templateUrl: './tmpl-list-body.component.html',
+    styleUrls: ['./componente.component.css'],
+    imports: [RouterLink, NormalizePipe, CommonModule,]
 })
 export class PeliculasListBodyComponent {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -27,11 +26,10 @@ export class PeliculasListBodyComponent {
 }
 
 @Component({
-  selector: 'app-peliculas-list',
-  templateUrl: './tmpl-list.component.html',
-  styleUrls: ['./componente.component.css'],
-  standalone: true,
-  imports: [RouterLink, PaginatorModule, PeliculasListBodyComponent, ],
+    selector: 'app-peliculas-list',
+    templateUrl: './tmpl-list.component.html',
+    styleUrls: ['./componente.component.css'],
+    imports: [RouterLink, PaginatorModule, PeliculasListBodyComponent,]
 })
 export class PeliculasListComponent implements OnChanges, OnDestroy {
   @Input() page = 0
@@ -59,11 +57,10 @@ export class PeliculasListComponent implements OnChanges, OnDestroy {
 }
 
 @Component({
-  selector: 'app-peliculas-add',
-  templateUrl: './tmpl-form.component.html',
-  styleUrls: ['./componente.component.css'],
-  standalone: true,
-  imports: [FormsModule, CommonModule, ErrorMessagePipe, NotblankValidator, TypeValidator, FormButtonsComponent, ExecPipe, ]
+    selector: 'app-peliculas-add',
+    templateUrl: './tmpl-form.component.html',
+    styleUrls: ['./componente.component.css'],
+    imports: [FormsModule, CommonModule, ErrorMessagePipe, NotblankValidator, TypeValidator, FormButtonsComponent, ExecPipe,]
 })
 export class PeliculasAddComponent implements OnInit {
   constructor(protected vm: PeliculasViewModelService) { }
@@ -74,11 +71,10 @@ export class PeliculasAddComponent implements OnInit {
 }
 
 @Component({
-  selector: 'app-peliculas-edit',
-  templateUrl: './tmpl-form.component.html',
-  styleUrls: ['./componente.component.css'],
-  standalone: true,
-  imports: [FormsModule, CommonModule, ErrorMessagePipe, NotblankValidator, TypeValidator, FormButtonsComponent, ExecPipe, ]
+    selector: 'app-peliculas-edit',
+    templateUrl: './tmpl-form.component.html',
+    styleUrls: ['./componente.component.css'],
+    imports: [FormsModule, CommonModule, ErrorMessagePipe, NotblankValidator, TypeValidator, FormButtonsComponent, ExecPipe,]
 })
 export class PeliculasEditComponent implements OnChanges {
   @Input() id?: string;
@@ -94,11 +90,10 @@ export class PeliculasEditComponent implements OnChanges {
 }
 
 @Component({
-  selector: 'app-peliculas-view',
-  templateUrl: './tmpl-view.component.html',
-  styleUrls: ['./componente.component.css'],
-  standalone: true,
-  imports: [RouterLink, CommonModule, FormButtonsComponent, ]
+    selector: 'app-peliculas-view',
+    templateUrl: './tmpl-view.component.html',
+    styleUrls: ['./componente.component.css'],
+    imports: [RouterLink, CommonModule, FormButtonsComponent,]
 })
 export class PeliculasViewComponent implements OnChanges {
   @Input() id?: string;
@@ -114,11 +109,10 @@ export class PeliculasViewComponent implements OnChanges {
 }
 
 @Component({
-  selector: 'app-peliculas',
-  templateUrl: './tmpl-anfitrion.component.html',
-  styleUrls: ['./componente.component.css'],
-  standalone: true,
-  imports: [PeliculasListComponent, PeliculasAddComponent, PeliculasEditComponent, PeliculasViewComponent, ],
+    selector: 'app-peliculas',
+    templateUrl: './tmpl-anfitrion.component.html',
+    styleUrls: ['./componente.component.css'],
+    imports: [PeliculasListComponent, PeliculasAddComponent, PeliculasEditComponent, PeliculasViewComponent,]
 })
 export class PeliculasComponent implements OnInit, OnDestroy {
   constructor(protected vm: PeliculasViewModelService, private route: ActivatedRoute) { }

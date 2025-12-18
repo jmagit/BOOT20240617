@@ -52,11 +52,10 @@ export class ActoresViewModelService extends ViewModelService<any, number> {
 }
 
 @Component({
-  selector: 'app-actores-list',
-  templateUrl: './tmpl-list.component.html',
-  styleUrls: ['./componente.component.css'],
-  standalone: true,
-  imports: [RouterLink, PaginatorModule, CommonModule, NormalizePipe, ]
+    selector: 'app-actores-list',
+    templateUrl: './tmpl-list.component.html',
+    styleUrls: ['./componente.component.css'],
+    imports: [RouterLink, PaginatorModule, CommonModule, NormalizePipe,]
 })
 export class ActoresListComponent implements OnChanges, OnDestroy {
   @Input() page = 0
@@ -72,11 +71,10 @@ export class ActoresListComponent implements OnChanges, OnDestroy {
 }
 
 @Component({
-  selector: 'app-actores-add',
-  templateUrl: './tmpl-form.component.html',
-  styleUrls: ['./componente.component.css'],
-  standalone: true,
-  imports: [FormsModule, CommonModule, ErrorMessagePipe, NormalizePipe, NotblankValidator, UppercaseValidator, TypeValidator, FormButtonsComponent,]
+    selector: 'app-actores-add',
+    templateUrl: './tmpl-form.component.html',
+    styleUrls: ['./componente.component.css'],
+    imports: [FormsModule, CommonModule, ErrorMessagePipe, NormalizePipe, NotblankValidator, UppercaseValidator, TypeValidator, FormButtonsComponent,]
 })
 export class ActoresAddComponent implements OnInit {
   constructor(protected vm: ActoresViewModelService) { }
@@ -87,11 +85,10 @@ export class ActoresAddComponent implements OnInit {
 }
 
 @Component({
-  selector: 'app-actores-edit',
-  templateUrl: './tmpl-form.component.html',
-  styleUrls: ['./componente.component.css'],
-  standalone: true,
-  imports: [FormsModule, CommonModule, ErrorMessagePipe, NormalizePipe, NotblankValidator, UppercaseValidator, TypeValidator, FormButtonsComponent,]
+    selector: 'app-actores-edit',
+    templateUrl: './tmpl-form.component.html',
+    styleUrls: ['./componente.component.css'],
+    imports: [FormsModule, CommonModule, ErrorMessagePipe, NormalizePipe, NotblankValidator, UppercaseValidator, TypeValidator, FormButtonsComponent,]
 })
 export class ActoresEditComponent implements OnChanges {
   @Input() id?: string;
@@ -107,11 +104,10 @@ export class ActoresEditComponent implements OnChanges {
 }
 
 @Component({
-  selector: 'app-actores-view',
-  templateUrl: './tmpl-view.component.html',
-  styleUrls: ['./componente.component.css'],
-  standalone: true,
-  imports: [ FormButtonsComponent, PeliculasListBodyComponent, ]
+    selector: 'app-actores-view',
+    templateUrl: './tmpl-view.component.html',
+    styleUrls: ['./componente.component.css'],
+    imports: [FormButtonsComponent, PeliculasListBodyComponent,]
 })
 export class ActoresViewComponent implements OnChanges {
   @Input() id?: string;

@@ -25,11 +25,10 @@ export class CategoriasViewModelService extends ViewModelService<any, number> {
 }
 
 @Component({
-  selector: 'app-categorias',
-  templateUrl: './tmpl-anfitrion.component.html',
-  styleUrls: ['./componente.component.css'],
-  standalone: true,
-  imports: [ FormsModule, RouterLink, FormButtonsComponent, ErrorMessagePipe, NotblankValidator, ]
+    selector: 'app-categorias',
+    templateUrl: './tmpl-anfitrion.component.html',
+    styleUrls: ['./componente.component.css'],
+    imports: [FormsModule, RouterLink, FormButtonsComponent, ErrorMessagePipe, NotblankValidator,]
 })
 export class CategoriasComponent implements OnInit {
   constructor(protected vm: CategoriasViewModelService) { }

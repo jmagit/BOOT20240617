@@ -7,7 +7,6 @@ import { NgIf } from '@angular/common';
     selector: 'app-form-buttons',
     templateUrl: './form-buttons.component.html',
     styleUrls: ['./form-buttons.component.css'],
-    standalone: true,
     imports: [NgIf]
 })
 export class FormButtonsComponent {

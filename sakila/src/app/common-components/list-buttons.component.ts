@@ -17,7 +17,6 @@ import { NgIf } from '@angular/common';
       }
     </div>
   `,
-    standalone: true,
     imports: [NgIf]
 })
 export class ListButtonsComponent {

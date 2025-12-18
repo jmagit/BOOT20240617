@@ -21,11 +21,10 @@ export class NovedadesDAOService {
 }
 
 @Component({
-  selector: 'app-novedades',
-  standalone: true,
-  imports: [PeliculasListBodyComponent, FormsModule, PastOrPresentValidator, ErrorMessagePipe],
-  templateUrl: './novedades.component.html',
-  styleUrls: ['./novedades.component.css']
+    selector: 'app-novedades',
+    imports: [PeliculasListBodyComponent, FormsModule, PastOrPresentValidator, ErrorMessagePipe],
+    templateUrl: './novedades.component.html',
+    styleUrls: ['./novedades.component.css']
 })
 export class NovedadesComponent implements OnInit {
   novedades: any = {}
